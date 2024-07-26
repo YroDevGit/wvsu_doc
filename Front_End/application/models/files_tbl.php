@@ -1,0 +1,63 @@
+<?php
+    defined('BASEPATH') OR exit('No direct script access allowed');
+
+    class files_tbl extends CY_Model {//created by: Vendor LENOVO-Name 82TT-Yro
+
+        public function __construct() {
+            parent::__construct();
+            /**
+             * in your controller. add this model
+             * CY_USE_MODEL('files_tbl');   or   $this->load->model('files_tbl');
+             */
+        }
+
+        
+        public function getTableName(){ //Sample function, you can delete or replace this.
+            return "CodeYRO";
+        } // to call this function: $this->files_tbl->getName();
+    
+        
+        public function getMyPendigFiles(){
+            $school = $this->school_tbl->mySchool();
+            $school_id = $school['id'];
+            $sql = "SELECT f.id, f.emp_id, f.`from`, e.fullname,f.caption, CONCAT(s.school,' ',s.campus)'school', f.doctype, f.details, f.purpose, f.receiving, f.`file`, DATE_FORMAT(f.date_created, '%M %d %Y')'date_created' FROM file f, emp e, school s WHERE (f.emp_id = e.id AND f.school = s.id AND e.school = s.id) or f.school = ? AND f.stat =0 and f.received_by = 0 GROUP BY f.id order by f.date_created DESC";
+            $param  = [$school_id];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code'] == CY_SUCCESS_CODE){
+                return $result['data'];
+            }
+        }
+
+        public function getMyFiles(){
+            $school = $this->school_tbl->mySchool();
+            $school_id = $school['id'];
+            $sql = "SELECT f.id, f.emp_id, f.`from`, e.fullname,f.caption, CONCAT(s.school,' ',s.campus)'school', f.doctype, f.details, f.purpose, f.receiving, f.`file`, DATE_FORMAT(f.date_created, '%M %d %Y')'date_created' FROM file f, emp e, school s WHERE (f.emp_id = e.id AND f.school = s.id AND e.school = s.id) or f.school = ? AND f.stat =0 and f.received_by != 0 GROUP BY f.id order by f.date_created DESC";
+            $param  = [$school_id];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code'] == CY_SUCCESS_CODE){
+                return $result['data'];
+            }
+        }
+
+        public function myFilesSent(){
+            $sql = "SELECT f.id, f.emp_id, f.received_by, f.caption, f.doctype, f.details, f.purpose, f.`file`, f.date_created, s.school, s.campus, s.full_name  FROM school s, file f WHERE f.school = s.id AND f.stat =0 AND f.emp_id = ?";
+            $param = [GET_LOGIN_DATA("emp_id")];
+            $result = CY_DB_SETQUERY($sql, $param);
+            SET_SESSION("LASTQUERY1", CY_DB_LAST_QUERY());
+            if($result['code']==CY_SUCCESS){
+                return $result['data'];
+            }
+            else{
+                return [];
+            }
+        }
+
+
+
+
+
+
+        
+
+    }
+?>

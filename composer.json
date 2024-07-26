@@ -1,0 +1,13 @@
+{
+    "require": {
+        "coolpraz/php-blade": "^0.1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    }
+}
+
+
+  

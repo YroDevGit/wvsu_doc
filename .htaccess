@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /wvsu_docs/
+
+    # Rewrite requests to Front_End if they are not for existing files or directories
+    RewriteCond %{REQUEST_URI} !^/Front_End/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ Front_End/$1 [L]
+
+    # Rewrite requests to Back_End if they are not for existing files or directories
+    RewriteCond %{REQUEST_URI} !^/Back_End/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^back_end/(.*)$ Back_End/$1 [L]
+
+    # Redirect Trailing Slashes...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+</IfModule>

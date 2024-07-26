@@ -1,0 +1,14 @@
+1. Open url (Example my server name is servername and project name is projectname)
+ * if using apache localhost: http://localhost/projectname/generate
+ * Using other server. http://servername/projectname/generate
+ * Default servername and projectname is already displayed in textfields, but change it if necessary
+ * After generating, you can open the project code using code editor like (VS code, SublimeText, etc.)
+ * Front_End folder and Back_End folder is separted: Front_End for User interface and Back_End is for Database and API's
+
+
+2. Create controller
+ * Easily create controller (replace your servername and projectname)
+ * Front_End: http://servername/projectname/generate/controller/FE/
+ * Back_End: http://servername/projectname/generate/controller/BE/
+ * Example: http://localhost/MyFirstProject/generate/controller/FE/
+ * You can delete the entire generate folder when development is done and ready for production

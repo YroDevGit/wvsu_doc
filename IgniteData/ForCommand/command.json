@@ -1,0 +1,12 @@
+{
+    "framework": {
+      "name": "CodeYRO",
+      "version": "1.0",
+      "released": "June 17 2024",
+      "details": {
+        "inspiration": ["CodeIgniter", "Laravel"],
+        "author": "Tyrone Limen Malocon"
+      }
+    }
+  }
+  
