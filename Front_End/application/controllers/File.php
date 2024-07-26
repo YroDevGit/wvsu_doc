@@ -191,13 +191,18 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
     public function ignoreFile(){
         $file_id = DECODE(POST("id"));
         $file_name = POST("filename");
+
+        $file_org = $this->files_tbl->getFileInfo($file_id);
         $condtion = [
             "id" => $file_id,
             "file" => $file_name
         ];
         $result = CY_DB_DELETE("file", $condtion);
         if($result['code'] == CY_SUCCESS_CODE){
-            $del_file = DELETE_STORAGE_FILE($file_name);
+            $del_file = ["code"=>CY_SUCCESS];
+            if($file_org['copy_of']==0){ //e delete ang original nga file, e stay ang copy nga file.
+                //$del_file = DELETE_STORAGE_FILE($file_name);
+            }
             if($del_file['code'] == CY_SUCCESS_CODE){
                 JSON_RESPONSE(["code"=> CY_SUCCESS, "info" => $result]);
             }

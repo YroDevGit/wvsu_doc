@@ -52,6 +52,16 @@
             }
         }
 
+        public function getFileInfo($fileid=0){
+            $sql = "select * from file where id = ?";
+            $param = [$fileid];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code']==CY_SUCCESS){
+                return $result['first_row'];
+            }
+            
+        }
+
 
 
 
