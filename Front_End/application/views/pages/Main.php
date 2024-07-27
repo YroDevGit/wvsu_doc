@@ -349,8 +349,8 @@
 						</ul>
 					</li>
 					<li>
-						<a href="invoice.html" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-analytics-17"></span><span class="mtext">Inventory</span>
+						<a href="<?=CONTROLLER('File/myDocuments')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-analytics-17"></span><span class="mtext">My Documents</span>
 						</a>
 					</li>
 					<li>

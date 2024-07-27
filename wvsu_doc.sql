@@ -62,11 +62,12 @@ CREATE TABLE IF NOT EXISTS `file` (
   `copy_of` int(11) DEFAULT 0,
   `stat` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table wvsu.file: ~1 rows (approximately)
+-- Dumping data for table wvsu.file: ~2 rows (approximately)
 REPLACE INTO `file` (`id`, `emp_id`, `from`, `sender_email`, `school`, `caption`, `doctype`, `details`, `purpose`, `receiving`, `file`, `date_created`, `date_received`, `received_by`, `copy_of`, `stat`) VALUES
-	(43, 0, 'Tyrone Lee Emz', 'xipebav349@leacore.com', 1, 'Thesis Docu', 'pdf', 'this is a thesis docu shared by me', 'just share', NULL, 'TRUE.pdf', '2024-07-27 00:00:00', '2024-07-27 00:00:00', 1008, 0, -1);
+	(43, 0, 'Tyrone Lee Emz', 'xipebav349@leacore.com', 1, 'Thesis Docu', 'pdf', 'this is a thesis docu shared by me', 'just share', NULL, 'TRUE.pdf', '2024-07-27 00:00:00', '2024-07-27 00:00:00', 1008, 0, -1),
+	(44, 1008, 'Berus Lee', 'tyronemalocon@gmail.com', 2, 'FIles on hand', 'doctype', 'details', 'thesis docu', NULL, 'YJGFBO2024-07-27-16-17-15ORUQFP.xlsx', '2024-07-27 04:17:15', '2024-07-27 04:17:15', 0, 0, 0);
 
 -- Dumping structure for table wvsu.file_downloads
 CREATE TABLE IF NOT EXISTS `file_downloads` (
@@ -78,9 +79,11 @@ CREATE TABLE IF NOT EXISTS `file_downloads` (
   `download_times` int(11) DEFAULT NULL,
   `date_downloaded` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table wvsu.file_downloads: ~1 rows (approximately)
+REPLACE INTO `file_downloads` (`id`, `emp_id`, `school`, `file_id`, `device`, `download_times`, `date_downloaded`) VALUES
+	(12, 1008, 1, 0, 'Windows NT YRO 10.0 build 22631 (Windows 11) AMD64   \rLENOVO        \r\r Model  \r82TT   \r\r', 1, '2024-07-27 05:01:00');
 
 -- Dumping structure for table wvsu.file_inventory
 CREATE TABLE IF NOT EXISTS `file_inventory` (
@@ -110,6 +113,25 @@ CREATE TABLE IF NOT EXISTS `file_viewer` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table wvsu.file_viewer: ~0 rows (approximately)
+
+-- Dumping structure for table wvsu.myfile
+CREATE TABLE IF NOT EXISTS `myfile` (
+  `file_id` int(11) NOT NULL,
+  `file_title` char(200) DEFAULT NULL,
+  `file_details` varchar(500) DEFAULT NULL,
+  `filename` varchar(500) DEFAULT NULL,
+  `emp_id` int(11) DEFAULT NULL,
+  `school_id` int(11) DEFAULT NULL,
+  `privacy` int(11) DEFAULT NULL,
+  `date_added` timestamp NULL DEFAULT NULL,
+  `stat` int(11) DEFAULT NULL,
+  `hash` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`file_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table wvsu.myfile: ~1 rows (approximately)
+REPLACE INTO `myfile` (`file_id`, `file_title`, `file_details`, `filename`, `emp_id`, `school_id`, `privacy`, `date_added`, `stat`, `hash`) VALUES
+	(0, 'sdfds', 'dsafd', 'ZKIVMJ2024-07-27-16-54-22RPFYAH.xlsx', 1008, 1, 0, '2024-07-27 15:00:29', 0, 'dsf');
 
 -- Dumping structure for table wvsu.school
 CREATE TABLE IF NOT EXISTS `school` (
@@ -149,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table wvsu.users: ~6 rows (approximately)
 REPLACE INTO `users` (`user_id`, `username`, `password`, `emp_id`, `type`, `active`, `code`, `stat`) VALUES
 	(5, 'wvsu', 'wvsu', 1005, 'SUPERADMIN', 1, 'TYRONELEEEMZ', 0),
-	(19, 'tyronemalocon@gmail.com', '62415', 1008, 'ADMIN', 1, 'TYRONELEEEMZ132343', 0),
+	(19, 'tyronemalocon@gmail.com', '1', 1008, 'ADMIN', 1, 'TYRONELEEEMZ132343', 0),
 	(20, 'tyrone@clearmindai.com', '04285', 1009, 'ADMIN', 1, '343TYRONELEEEMZ', 0),
 	(21, 'yonak49184@fuzitea.com', '26098', 1010, 'ICT', 1, 'TYRONELEEEMZ2664', 0),
 	(22, 'vasohap969@hostlace.com', '', 1012, 'ICT', 0, 'DTIZOR2024-07-27-01-47-00CFUATY1012', 0),

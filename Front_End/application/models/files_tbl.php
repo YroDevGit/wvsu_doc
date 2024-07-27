@@ -62,6 +62,15 @@
             
         }
 
+        public function getMyDocuments(){
+            $sql = "select * from myfile where stat = 0 and emp_id = ?";
+            $param = [GET_LOGIN_DATA("emp_id")];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code']==CY_SUCCESS){
+                return $result['data'];
+            }
+        }
+
 
 
 

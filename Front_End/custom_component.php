@@ -50,6 +50,20 @@ if(! function_exists("SELECTED_ROLES_TAB")){
         }
     }
 }
+
+if(! function_exists("INPUT_FIELD")){
+    function INPUT_FIELD($field_label, $field_name, $placeholder, $field_icon="icon-copy dw dw-file"){
+        ?>
+                <div><label style="color:gray;font-size:14px;" for=""><i class="<?=$field_icon?>"></i> <?=$field_label?>: <span class="text-danger"><?=VALIDATION_INPUT_ERROR($field_name)?></span></label></div>
+                <div class="input-group1 custom">
+                    <input type="text" class="form-control form-control-sm" placeholder="<?=$placeholder?>" name="<?=$field_name?>">
+                    <div class="input-group-append custom">
+                        <span class="input-group-text"></i></span>
+                    </div>
+                </div>
+        <?php
+    }
+}
 //add custom component here, see reference above or you can copy, paste and modify it
 
 ?>

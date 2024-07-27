@@ -57,11 +57,56 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
     public function MyFiles(){
         AUTHENTICATE_CY_USER(true);
         $page_data = [
-            "title" => "My Documents",
+            "title" => "Accepted Documents",
             "content" => "MyDocs"
         ];
         CY_SHOW_PAGE("Main", $page_data);
     } 
+
+    public function myDocuments(){
+        $page_data = [
+            "title" => "My Documents/Inventory",
+            "content" => "Inventory"
+        ];
+        CY_SHOW_PAGE("Main", $page_data);
+    }
+
+    public function addMyFile(){
+        SET_VALIDATION("title", "Title", "required");
+        SET_VALIDATION("details", "Details", "required");
+        SET_VALIDATION("hash", "Hashtags", "required");
+        SET_VALIDATION("privacy", "Privacy", "required");
+        SET_FILE_VALIDATION("attfile", "File/Attachment", "pdf|png|jpg|jpeg|docx|xlsx", "Images/Documents");
+        if(IS_VALIDATION_FAILED()){
+            VALIDATION_FAILED_REDIRECT("File/myDocuments");
+        }
+        else{
+            $file_upload = UPLOAD_FILE("attfile", CY_AUTO_RENAME_FILE);
+            if($file_upload['code']==CY_SUCCESS){
+                $filename = $file_upload['filename'];
+
+                $data = [
+                    "file_title" => POST("title"),
+                    "file_details" => POST('details'),
+                    "filename" => $filename,
+                    "emp_id" => GET_LOGIN_DATA("emp_id"),
+                    "school_id" => $this->EMPDATA['school'],
+                    "privacy" => DECODE(POST('privacy')),
+                    "hash" => POST("hash"),
+                    "stat" => "0"
+                ];
+                $result = CY_DB_INSERT("myfile", $data);
+                if($result['code']==CY_SUCCESS){
+                    SET_FLASHDATA("file", "SUCCESS");
+                    CY_REDIRECT("File/myDocuments");
+                }
+                else{
+                    SET_FLASHDATA("file", "FAILED");
+                    CY_REDIRECT("File/myDocuments");
+                }
+            }
+        }
+    }
 
 
     public function sendFile(){
@@ -70,7 +115,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         SET_VALIDATION("doctype", "Document type", "required");
         SET_VALIDATION("details", "Details", "required");
         SET_VALIDATION("purpose", "Purpose", "required");
-        SET_FILE_VALIDATION("attfile", "Attachment/File", "pdf|png|jpg|jpeg|docx", "Images/Documents");
+        SET_FILE_VALIDATION("attfile", "Attachment/File", "pdf|png|jpg|jpeg|docx|xlsx", "Images/Documents");
         if(IS_VALIDATION_FAILED()){
             CY_BACK_TO_PREVIOUS_PAGE();
         }
@@ -113,10 +158,8 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         SET_VALIDATION("details", "Details", "required");
         SET_VALIDATION("purpose", "Purpose of submission", "required");
         SET_VALIDATION("myemail", "Sender Email", "valid_email");
+        SET_FILE_VALIDATION("attfile", "File/Attachment", "pdf|png|jpg|jpeg|docx|xlsx","Images/Documents");
 
-        if(! HAS_FILE_SUBMITTED("attfile")){
-            VALIDATION_SET_INPUT_ERROR("attfile", "File/Attachment is required.!");
-        }
 
         if(IS_VALIDATION_FAILED()){
             VALIDATION_FAILED_REDIRECT("Login");
