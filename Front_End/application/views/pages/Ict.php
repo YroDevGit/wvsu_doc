@@ -201,7 +201,7 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-						<a class="dropdown-item" href="profile.html" data-toggle="modal" data-target="#bd-example-modal-lg1222"><i class="icon-copy fa fa-barcode"></i> Barcode</a>
+						<a class="dropdown-item" data-toggle="modal" data-target="#bd-example-modal-lg1222"><i class="icon-copy fa fa-barcode"></i> Barcode</a>
 						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
 						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
 						<a class="dropdown-item" href="<?= CONTROLLER("Login/AuthLogout") ?>"><i class="dw dw-logout"></i> Log Out</a>
