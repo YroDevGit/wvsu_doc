@@ -49,7 +49,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#bd-example-modal-lg1" onclick="showViews('<?=ENCRYPT($col['id'])?>','<?=$col['file']?>','<?=$col['caption']?>')"><i class="dw dw-eye"></i> View History</a>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#bd-example-modal-lg" onclick="showDownloads('<?=ENCRYPT($col['id'])?>','<?=$col['file']?>','<?=$col['caption']?>')"><i class="dw dw-download"></i> Download History</a>
-                                    <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
+                                    <a class="dropdown-item" href="#" onclick="hideFile('<?=ENCRYPT($col['id'])?>')"><i class="dw dw-delete-3"></i> Delete</a>
                                 </div>
                             </div>
                         </td>
@@ -206,6 +206,18 @@ async function showViews($file_id, $filename, $captionlabel){
             col.date
         ]).draw(false)
         );
+    }
+}
+
+async function hideFile($file_id){
+    $param = {"file_id":$file_id};
+    $result =await axios.post("<?= CONTROLLER() ?>File/hideFile", $param);
+    $status = $result.data;
+    if($status.code == 200){
+        SuccessMessage("File Removed", "reload");
+    }
+    else{
+        ErrorMessage("Failed");
     }
 }
 

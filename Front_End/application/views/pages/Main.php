@@ -193,6 +193,7 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
+						<a class="dropdown-item" href="profile.html" data-toggle="modal" data-target="#bd-example-modal-lg1222"><i class="icon-copy fa fa-barcode"></i> Barcode</a>
 						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
 						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
 						<a class="dropdown-item" href="<?= CONTROLLER("Login/AuthLogout") ?>"><i class="dw dw-logout"></i> Log Out</a>
@@ -204,6 +205,28 @@
 			</div>
 		</div>
 	</div>
+
+<!-- START BARCODE -->
+<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg1222" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Login barcode</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+			<div id="qrcode111" align="center" style="padding: 20px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END BARCODE -->
+
+
 
 	<div class="right-sidebar">
 		<div class="sidebar-title">
@@ -377,3 +400,16 @@
 	<script src="<?= ASSETS() ?>vendors/scripts/datatable-setting.js"></script></body>
 </html>
 
+<script src="<?= SRC()?>qrcode.min.js"></script>
+	<script>
+        window.addEventListener("load", function(){
+			var qrcode = new QRCode(document.getElementById("qrcode111"), {
+            text: "<?=GET_LOGIN_DATA('code')?>",
+            width: 350,
+            height: 350,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+		})
+    </script>

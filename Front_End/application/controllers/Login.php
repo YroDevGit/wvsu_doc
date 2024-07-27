@@ -65,6 +65,24 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
     }
 
+    public function scann(){
+        $code = DECODE(POST('code'));
+        $sql = "select * from users where code = ? and stat = 0  and active = 1";
+        $param = [$code];
+        $result = CY_DB_SETQUERY($sql, $param);
+        if($result['code']==CY_SUCCESS){
+            $data = $result['first_row'];
+            if(empty($data)){
+                JSON_RESPONSE_DATA(-1, "Failed", "Failed");
+            }
+            else{
+                SET_LOGIN(true, $data);
+                JSON_RESPONSE_DATA(CY_SUCCESS, "SUCCESS", "Login Success");
+            }
+        }
+        
+    }
+
     public function LoginSuccess(){
         CY_REDIRECT("File");
     }

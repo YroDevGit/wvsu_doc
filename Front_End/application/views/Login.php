@@ -22,7 +22,7 @@
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-	<?php ADD_ALL_SCRIPTS([]) ?>
+	<?php ADD_ALL_SCRIPTS(["react"]) ?>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
@@ -199,7 +199,7 @@
 									</div>
 									<div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
 									<div class="input-group mb-0">
-										<a class="btn btn-outline-primary btn-lg btn-block" href="<?= CONTROLLER("Register") ?>">Register To Create Account</a>
+										<a class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#bd-example-modal-lg010101" id="startScanner">SCAN BARCODE</a>
 									</div>
 								</div>
 							</div>
@@ -209,11 +209,27 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg010101" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Login barcode</h4>
+                <button type="button" class="close" id="closemodax" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+				<div align="center"><video id="videoscanner" width="350" height="350" style="border: 1px solid black"></video></div>
+            </div>
+
+        </div>
+    </div>
+</div>
 	<!-- js -->
 	<script src="<?= ASSETS() ?>vendors/scripts/core.js"></script>
 	<script src="<?= ASSETS() ?>vendors/scripts/script.min.js"></script>
 	<script src="<?= ASSETS() ?>vendors/scripts/process.js"></script>
 	<script src="<?= ASSETS() ?>vendors/scripts/layout-settings.js"></script>
+	<script src="<?=SRC()?>barcodescanner.js"></script>
 </body>
 </html>
 <style>.input-group1{padding-bottom: 10px;} .brand-logo a span{color:#1502bd;} .bootstrap-select .dropdown-toggle{height:38px;font-size: .875rem;}</style>
@@ -239,6 +255,87 @@
 		PageLoaded(()=> ErrorMessage("Failed to submit document"));
 	</script>
 <?php endif; ?>
+
+
+<script>
+	window.addEventListener("load", function(){
+		const codeReader = new ZXing.BrowserMultiFormatReader();
+        const video = document.getElementById('videoscanner');
+        const result = document.getElementById('result');
+        const startScannerButton = document.getElementById('startScanner');
+        const stopScannerButton = document.getElementById('closemodax');
+
+        let scanning = false;
+
+		function scanBarcode() {
+            return new Promise((resolve, reject) => {
+                if (scanning) return; 
+
+                scanning = true;
+              
+
+                codeReader
+                    .listVideoInputDevices()
+                    .then((videoInputDevices) => {
+                        const firstDeviceId = videoInputDevices[0].deviceId;
+                        codeReader.decodeOnceFromVideoDevice(firstDeviceId, 'videoscanner')
+                            .then((scanResult) => {
+                                scanning = false; 
+                                resolve(scanResult.text);
+								
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                                scanning = false; 
+                                reject(err);
+                            });
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        scanning = false; 
+                        reject(err);
+                    });
+            });
+        }
+
+		function stopScanner() {
+            if (!scanning) return; 
+
+            codeReader.reset();
+            video.srcObject.getTracks().forEach(track => track.stop());
+            scanning = false;
+        }
+
+		stopScannerButton.addEventListener('click', stopScanner);
+
+        document.getElementById('startScanner').addEventListener('click', () => {
+            scanBarcode()
+                .then(barcodeText => {
+					video.srcObject.getTracks().forEach(track => track.stop());
+					stopScannerButton.click();
+					LoginBarcode(barcodeText);
+                })
+                .catch(err => {
+                    console.error('Scanning failed:', err);
+					video.srcObject.getTracks().forEach(track => track.stop());
+					stopScannerButton.click();
+                });
+				
+        });
+
+		async function LoginBarcode($code){
+			$param = {"code":ENCRYPT($code)};
+			$result = await axios.post("<?=CONTROLLER()?>Login/scann", $param);
+			$status = $result.data;
+			if($status.code == 200){
+				SuccessMessage("Login success", "reload");
+			}
+			else{
+				ErrorMessage("Login Failed", "reload");
+			}
+		}
+	});
+</script>
 
 	
 

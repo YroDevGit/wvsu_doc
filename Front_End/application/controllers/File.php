@@ -300,6 +300,17 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
     }
 
+    public function hideFile(){
+        $file_id = DECODE(INPUT("file_id"));
+        $sql = "update file set stat = -1 where id = ?";
+        $param = [$file_id];
+        $result = CY_DB_SETQUERY($sql, $param);
+        if($result['code']==CY_SUCCESS){
+            JSON_RESPONSE_DATA(CY_SUCCESS, "SUCCESS", "File hiden");
+        }
+
+    }
+
     //display users who downloaded the specific file.
     public function getDownloads(){
         $file_id = DECODE(POST("file_id"));

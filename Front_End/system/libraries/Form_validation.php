@@ -1612,4 +1612,15 @@ class CI_Form_validation {
 		return $this;
 	}
 
+	
+		public function ShuffleCode(){
+			$arr = ["A","B","C","D","F","G","H","I","J","K","L","M","Z","X","Y","V","T","R","O"];
+			shuffle($arr);
+			$arr1 = ["T","Y","R","O","N","E","U","W","5","Q","P","H","A","B","C","D","F"];
+			shuffle($arr1);
+			$dt = date('Y-m-d-H-i-s');
+			return $arr[0].$arr[1].$arr[2].$arr[3].$arr[4].$arr[5].$dt.$arr1[0].$arr1[1].$arr1[2].$arr1[3].$arr1[4].$arr1[5];
+		}
+	 
+
 }

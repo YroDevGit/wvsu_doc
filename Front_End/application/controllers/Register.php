@@ -53,7 +53,7 @@ class Register extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
                 "school" => DECODE(INPUT("school")),
                 "date_added" => date("Y-m-d"),
                 "added_by" => 0,
-                "stat" => 0,
+                "stat" => 0, 
                 "id_card" => $file_upload['filename']
             ];
 
@@ -66,7 +66,8 @@ class Register extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
                 "emp_id" => $emp_id,
                 "type" => strtoupper(DECODE($role)),
                 "active" => 0,
-                "stat" => 0
+                "stat" => 0, 
+                "code" => $this->form_validation->ShuffleCode().$emp_id
             ];
             $user_status = CY_DB_INSERT("users", $data_user);
 
