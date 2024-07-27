@@ -47,6 +47,14 @@
             }
         }
 
+        public function getAllSchools(){
+            $sql = "select * from school where stat = 0";
+            $result = CY_DB_SETQUERY($sql);
+            if($result['code'] ==  CY_SUCCESS_CODE){
+                return $result['data'];
+            }
+        }
+
         
         
         //add functions here...

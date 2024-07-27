@@ -266,6 +266,11 @@
 							<li><a href="<?= CONTROLLER("Users/ActiveUsers") ?>">All Users</a></li>
 						</ul>
 					</li>
+					<li>
+						<a href="<?=CONTROLLER('Schools/AllSchools')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-building"></span><span class="mtext">All Schools</span>
+						</a>
+					</li>
 
 					<li>
 						<div class="dropdown-divider"></div>
