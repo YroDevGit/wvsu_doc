@@ -218,7 +218,7 @@
                 <button type="button" class="close" id="closemodax" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-				<div align="center"><video id="videoscanner" width="350" height="350" style="border: 1px solid black"></video></div>
+				<div align="center"><video id="videoscanner" width="370" height="370" style="border: 1px solid black"></video></div>
             </div>
 
         </div>
