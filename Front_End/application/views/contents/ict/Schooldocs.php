@@ -20,7 +20,7 @@
 <div class="card-box mb-30">
     <div class="pd-20">
     <?php $schoolname = $this->school_tbl->mySchool('school'); $campusname = $this->school_tbl->mySchool('campus'); ?>
-    <h4 class="text-blue h4"><?= $schoolname." ".$campusname ?> Documents</h4>
+    <h4 class="text-blue h4"><?= $schoolname." ".$campusname ?> Shared Documents</h4>
     </div>
     <div class="pb-20">
         <table class="table hover data-table-export nowrap" export="Files">

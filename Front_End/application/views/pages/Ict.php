@@ -339,7 +339,7 @@
 					
 					<li>
 						<a href="<?= CONTROLLER("File") ?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-file-72"></span><span class="mtext">School documents</span>
+							<span class="micon dw dw-file-72"></span><span class="mtext">Shared documents</span>
 						</a>
 					</li>
 					<li>

@@ -30,7 +30,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
         if($role=="ICT"){
             $page_data = [
-                "title" => "School documents",
+                "title" => "Shared documents",
                 "content" => "Schooldocs"
             ];
             CY_SHOW_PAGE("Ict", $page_data);
@@ -57,7 +57,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
     public function MyFiles(){
         AUTHENTICATE_CY_USER(true);
         $page_data = [
-            "title" => "Accepted Documents",
+            "title" => "Shared Documents",
             "content" => "MyDocs"
         ];
         CY_SHOW_PAGE("Main", $page_data);

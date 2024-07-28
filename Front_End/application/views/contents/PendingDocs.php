@@ -30,10 +30,11 @@
                     <th class="table-plus datatable-nosort">Action</th>
                     <th class="">From</th>
                     <th>Title</th>
+                    <th>File</th>
                     <th>Document Type</th>
                     <th>Details</th>
                     <th>Purpose</th>
-                    <th>File</th>
+                    
                     <th>Date</th> 
                 </tr>
             </thead>
@@ -47,10 +48,10 @@
                         </td>
                         <td><?=($col['emp_id']==0)? "<i class='icon-copy dw dw-user1' title='public user'></i> " : "<i class='icon-copy dw dw-building' title='school user'></i> "?><?= ($col['emp_id'] == 0) ? $col['from'] : $col['fullname'] ?></td>
                         <td><?= $col['caption'] ?></td>
+                        <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', false)"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
                         <td><?= $col['doctype'] ?></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['details'] ?>" title="Details">👁️</button></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['purpose'] ?>" title="Purpose">👁️</button></td>
-                        <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', false)"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
                         <td><?= $col['date_created'] ?></td>
                     </tr>
                 <?php endforeach; ?>

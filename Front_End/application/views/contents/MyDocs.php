@@ -20,7 +20,7 @@
 <div class="card-box mb-30">
     <div class="pd-20">
        
-        <h4 class="text-blue h4">Accepted Documents</h4>
+        <h4 class="text-blue h4">Shared Documents</h4>
     </div>
     <div class="pb-20">
         <table class="table hover data-table-export nowrap" export="Files">
@@ -29,9 +29,9 @@
                     <th></th>
                     <th class="table-plus datatable-nosort">Action</th>
                     <th>Title</th>   
+                    <th>File</th>
                     <th>Details</th>
                     <th>Purpose</th>
-                    <th>File</th>
                     <th class="">From</th>
                     <th>Date</th> 
                     <th>Document Type</th>
@@ -54,9 +54,9 @@
                             </div>
                         </td>
                         <td><?= $col['caption'] ?></td>
+                        <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', true, '<?=ENCRYPT($col['id'])?>'); trackViewer('<?=ENCRYPT($col['id'])?>')"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['details'] ?>" title="Details">👁️</button></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['purpose'] ?>" title="Purpose">👁️</button></td>
-                        <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', true, '<?=ENCRYPT($col['id'])?>'); trackViewer('<?=ENCRYPT($col['id'])?>')"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
                         <td><?= ($col['emp_id'] == 0) ? $col['from'] : $col['fullname'] ?></td>
                         <td><?= $col['date_created'] ?></td>
                         <td><?= $col['doctype'] ?></td>

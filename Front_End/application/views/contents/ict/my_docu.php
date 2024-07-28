@@ -49,7 +49,6 @@
                                     <!--<a class="dropdown-item"  ><i class="icon-copy dw dw-right-arrow"></i>Forward</a>-->
                                     <a class="dropdown-item" onclick="deleteDocu('<?=ENCRYPT($col['file_id'])?>', '<?=$col['file_title']?>')"><i class="dw dw-delete-3"></i> Delete</a>
                                 </div>
-                               
                             </div>
                         </td>
                         <td><?= $col['file_title'] ?></td>
