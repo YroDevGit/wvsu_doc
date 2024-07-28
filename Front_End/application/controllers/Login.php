@@ -33,7 +33,7 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         SET_VALIDATION("password", "Password", "required");
         SET_VALIDATION("options", "Role", "required");
         if(IS_VALIDATION_FAILED()){
-            VALIDATION_FAILED_REDIRECT("Login");
+            VALIDATION_FAILED_BACK();
         }
         else{
             $sql = "select * from users where username = ? and password = ? and type = ? and stat = 0";

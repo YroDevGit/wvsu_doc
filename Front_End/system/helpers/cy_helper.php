@@ -1826,26 +1826,30 @@ if(! function_exists("GET_PREVIOUS_PAGE")){
          */
         $CY =& get_instance();
         $referer_url = $CY->input->server('HTTP_REFERER');
-
+        
         if ($referer_url) {
             $parsed_url = parse_url($referer_url);
             $path = $parsed_url['path'];
-
-            $base_url_length = strlen(parse_url(base_url(), PHP_URL_PATH));
-            $controller_method = substr($path, $base_url_length);
-
-            $parts = explode('/', trim($controller_method, '/'));
-
-            if (count($parts) >= 2) {
+    
+            $base_url_path = rtrim(parse_url(base_url(), PHP_URL_PATH), '/');
+            $controller_method = trim(substr($path, strlen($base_url_path)), '/');
+        
+            $parts = explode('/', $controller_method);
+        
+            if (count($parts) == 1) {
+                $previous_controller = $parts[0];
+                $previous_method = ''; 
+                return $previous_controller;
+            } elseif (count($parts) >= 2) {
                 $previous_controller = $parts[0];
                 $previous_method = $parts[1];
                 return $previous_controller . "/" . $previous_method;
             } else {
-               return "";
+                return "";
             }
         } else {
             return "";
-        }
+        }  
     }
 }
 
