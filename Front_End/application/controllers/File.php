@@ -63,6 +63,15 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         CY_SHOW_PAGE("Main", $page_data);
     } 
 
+    public function ICTFile(){//For ICT users
+        AUTHENTICATE_CY_USER(true);
+        $page_data = [
+            "title" => "My Documents",
+            "content" => "my_docu"
+        ];
+        CY_SHOW_PAGE("Ict", $page_data);
+    } 
+
     public function deleteMyFile(){
         $id = DECODE(POST("id"));
         $name = POST("name");
@@ -122,6 +131,43 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
                 else{
                     SET_FLASHDATA("file", "FAILED");
                     CY_REDIRECT("File/myDocuments");
+                }
+            }
+        }
+    }
+
+    public function addICTFile(){
+        SET_VALIDATION("title", "Title", "required");
+        SET_VALIDATION("details", "Details", "required");
+        SET_VALIDATION("hash", "Hashtags", "required");
+        SET_VALIDATION("privacy", "Privacy", "required");
+        SET_FILE_VALIDATION("attfile", "File/Attachment", "pdf|png|jpg|jpeg|docx|xlsx", "Images/Documents");
+        if(IS_VALIDATION_FAILED()){
+            VALIDATION_FAILED_REDIRECT("File/ICTFile");
+        }
+        else{
+            $file_upload = UPLOAD_FILE("attfile", CY_AUTO_RENAME_FILE);
+            if($file_upload['code']==CY_SUCCESS){
+                $filename = $file_upload['filename'];
+
+                $data = [
+                    "file_title" => POST("title"),
+                    "file_details" => POST('details'),
+                    "filename" => $filename,
+                    "emp_id" => GET_LOGIN_DATA("emp_id"),
+                    "school_id" => $this->EMPDATA['school'],
+                    "privacy" => DECODE(POST('privacy')),
+                    "hash" => POST("hash"),
+                    "stat" => "0"
+                ];
+                $result = CY_DB_INSERT("myfile", $data);
+                if($result['code']==CY_SUCCESS){
+                    SET_FLASHDATA("file", "SUCCESS");
+                    CY_REDIRECT("File/ICTFile");
+                }
+                else{
+                    SET_FLASHDATA("file", "FAILED");
+                    CY_REDIRECT("File/ICTFile");
                 }
             }
         }

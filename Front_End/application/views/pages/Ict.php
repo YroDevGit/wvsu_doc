@@ -224,7 +224,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
-			<div align="center" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif"><?=$this->EMPDATA['fullname']?></div>
+			<div align="center" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; user-select: none;"><?=GET_LOGIN_DATA("username")?></div>
 			<div id="qrcode111" align="center" style="padding: 20px;"></div>
             </div>
             <div class="modal-footer">
@@ -340,6 +340,11 @@
 					<li>
 						<a href="<?= CONTROLLER("File") ?>" class="dropdown-toggle no-arrow">
 							<span class="micon dw dw-file-72"></span><span class="mtext">School documents</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?= CONTROLLER("File/ICTFile") ?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-file-72"></span><span class="mtext">My documents</span>
 						</a>
 					</li>
 					<li>

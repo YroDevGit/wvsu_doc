@@ -1,4 +1,4 @@
-<?php CY_ASSIGNED_ROLES(["ADMIN"]) ?>
+<?php CY_ASSIGNED_ROLES(["ICT"]) ?>
 <div class="page-header">
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -74,7 +74,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             
-            <form action="<?=CONTROLLER()?>File/addMyFile" method="post" enctype="multipart/form-data">
+            <form action="<?=CONTROLLER()?>File/addICTFile" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <?php INPUT_FIELD("Title", "title", "Title") ?>
                     <?php INPUT_FIELD("Details", "details", "Details") ?>
