@@ -45,8 +45,10 @@
                                     <i class="dw dw-more"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                    <a class="dropdown-item" href="#" ><i class="dw dw-delete-3"></i> Delete</a>
+                                    <!--<a class="dropdown-item"  ><i class="icon-copy dw dw-right-arrow"></i>Forward</a>-->
+                                    <a class="dropdown-item" onclick="deleteDocu('<?=ENCRYPT($col['file_id'])?>', '<?=$col['file_title']?>')"><i class="dw dw-delete-3"></i> Delete</a>
                                 </div>
+                               
                             </div>
                         </td>
                         <td><?= $col['file_title'] ?></td>
@@ -74,7 +76,7 @@
                 <div class="modal-body">
                     <?php INPUT_FIELD("Title", "title", "Title") ?>
                     <?php INPUT_FIELD("Details", "details", "Details") ?>
-                    <?php INPUT_FIELD("Hashtags", "hash", "Hashtags") ?>
+                    <?php INPUT_FIELD("Hashtags", "hash", "Hashtags", "icon-copy dw dw-tag") ?>
                     <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-attachment"></i> Attach file: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("attfile")?></span></label></div>
                     <div class="input-group1 custom">
                         <input type="file" class="form-control form-control-sm" placeholder="Attach file" name="attfile">
@@ -83,7 +85,7 @@
                         </div>
                     </div>
 
-                    <label style="color:gray;" for=""><i class="icon-copy dw dw-building1"></i> Privacy: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("privacy")?></span></label>
+                    <label style="color:gray;" for=""><i class="icon-copy dw dw-key1"></i> Privacy: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("privacy")?></span></label>
                     <div class="input-group1 custom">
                         <select class="selectpicker form-control" id="schoolSelect" data-live-search="true" name="privacy">
                             <option value="">SELECT PRIVACY</option>
@@ -171,6 +173,20 @@
             ErrorMessage("An error occurred while processing your request.");
         } 
     });
+    }
+
+    async function deleteDocu($id, $name){
+        ConfirmationMessage("Are you sure to delete file: "+$name+"?", async function(){
+            $param = {"id": $id, "name":$name};
+            $result = await axios.post("<?= CONTROLLER() ?>File/deleteMyFile", $param);
+            $status = $result.data;
+            if($status.code == 200){
+                SuccessMessage("Document deleted", "reload");
+            }
+            else{
+                ErrorMessage("Failed to delete document", "reload");
+            }
+        });
     }
 
 </script>

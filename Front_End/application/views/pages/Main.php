@@ -335,7 +335,7 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="<?= CONTROLLER("File") ?>">Pending</a></li>
-							<li><a href="<?= CONTROLLER("File/MyFiles") ?>">My Documents</a></li>
+							<li><a href="<?= CONTROLLER("File/MyFiles") ?>">Shared Documents</a></li>
 							<li><a href="<?= CONTROLLER("File/sentFiles") ?>">Sent documents</a></li>
 						</ul>
 					</li>

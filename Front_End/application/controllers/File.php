@@ -63,6 +63,25 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         CY_SHOW_PAGE("Main", $page_data);
     } 
 
+    public function deleteMyFile(){
+        $id = DECODE(POST("id"));
+        $name = POST("name");
+        $condition = [
+            "file_id" => $id,
+            "file_title" => $name
+        ];
+        $set = [
+            "stat" => -1
+        ];
+        $result = CY_DB_UPDATE("myfile", $condition, $set);
+        if($result['code']==CY_SUCCESS){
+            JSON_RESPONSE_DATA(CY_SUCCESS, "Success", "data deleted");
+        }
+        else{
+            JSON_RESPONSE_DATA(-1, "Failed", "failed to delete data");
+        }
+    }
+
     public function myDocuments(){
         $page_data = [
             "title" => "My Documents/Inventory",

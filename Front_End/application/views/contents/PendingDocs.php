@@ -45,7 +45,7 @@
                         <button class="btn btn-success" style="border-radius: 50%;height:28px; width:28px;text-align:center;padding:0px;font-size:0px;" onclick="ReceiveDoc(this)" data="<?= ENCRYPT($col['id']) ?>" title="Accept file"><span class="icon-copy ti-check-box text-white" style="font-size:16px;"></span></button>
                         <button class="btn btn-danger" style="border-radius: 50%;height:28px; width:28px;text-align:center;padding:0px;font-size:0px;" onclick="IgnoreDoc(this)" data="<?= ENCRYPT($col['id']) ?>" filename="<?= $col['file'] ?>" title="Ignore file"><span class="icon-copy dw dw-delete-3 text-white" style="font-size:16px;"></span></button>
                         </td>
-                        <td><?= ($col['emp_id'] == 0) ? $col['from'] : $col['fullname'] ?></td>
+                        <td><?=($col['emp_id']==0)? "<i class='icon-copy dw dw-user1' title='public user'></i> " : "<i class='icon-copy dw dw-building' title='school user'></i> "?><?= ($col['emp_id'] == 0) ? $col['from'] : $col['fullname'] ?></td>
                         <td><?= $col['caption'] ?></td>
                         <td><?= $col['doctype'] ?></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['details'] ?>" title="Details">👁️</button></td>
