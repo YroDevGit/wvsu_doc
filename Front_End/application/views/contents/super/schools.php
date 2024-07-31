@@ -29,6 +29,7 @@
                     <th class="table-plus datatable-nosort">Action</th>
                     <th>School</th>   
                     <th>Campus</th>
+                    <th>Department</th>
                     <th>School name</th>
                     <th>School number</th>
                     <th>Facebook link</th>
@@ -42,6 +43,7 @@
                         <td></td>
                         <td><?=$col['school']?></td>
                         <td><?=$col['campus']?></td>
+                        <td><?=$col['department']?></td>
                         <td><?=$col['full_name']?></td>
                         <td><?=$col['school_code']?></td>
                         <td><?=$col['fb_link']?></td>
@@ -75,6 +77,14 @@
                 <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Campus: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("campus")?></span></label></div>
                 <div class="input-group1 custom">
                     <input type="text" class="form-control form-control-sm" placeholder="Campus" name="campus">
+                    <div class="input-group-append custom">
+                        <span class="input-group-text"></i></span>
+                    </div>
+                </div>
+
+                <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Department: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("department")?></span></label></div>
+                <div class="input-group1 custom">
+                    <input type="text" class="form-control form-control-sm" placeholder="Department" name="department">
                     <div class="input-group-append custom">
                         <span class="input-group-text"></i></span>
                     </div>

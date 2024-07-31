@@ -328,7 +328,7 @@
 					</li>
 					<li>
 					<div align="center" class="text-white">
-							<div>ICT DEPARTMENT</div>
+							<div><?=$this->school_tbl->mySchool('department')?></div>
 							<div><small><?= $this->school_tbl->mySchool('full_name') ?></small></div>
 							<div><small><?= $this->school_tbl->mySchool('campus') ?></small></div>
 						</div>

@@ -323,7 +323,7 @@
 						<div align="center" class="text-white">
 							<div>SCHOOL ADMIN</div>
 							<div><small><?= $this->school_tbl->mySchool('full_name') ?></small></div>
-							<div><small><?= $this->school_tbl->mySchool('campus') ?></small></div>
+							<div><small><?= $this->school_tbl->mySchool('campus').' '.$this->school_tbl->mySchool('department') ?></small></div>
 						</div>
 					</li>
 					<li>

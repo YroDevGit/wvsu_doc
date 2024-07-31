@@ -20,7 +20,7 @@ if(! function_exists("SELECTED_ROLES_TAB")){
             ?>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link text-blue" id="tab_home" data-toggle="tab" href="#home" role="tab" aria-selected="true">School Tech (ICT)</a>
+                    <a class="nav-link text-blue" id="tab_home" data-toggle="tab" href="#home" role="tab" aria-selected="true">Student</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-blue" id="tab_admin" data-toggle="tab" href="#profile" role="tab" aria-selected="false">Admin</a>

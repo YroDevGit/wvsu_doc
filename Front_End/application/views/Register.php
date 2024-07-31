@@ -64,7 +64,7 @@
 									<div class="tab-pane fade show active" id="home" role="tabpanel">
 										<div class="pd-20">
                                             <div class="login-title pb-20">
-                                                <h6 class="text-center text-primary">Register as School tech (ICT)</h6>
+                                                <h6 class="text-center text-primary">Register as Student</h6>
                                             </div>
                                             <form  enctype="multipart/form-data" action="<?= CONTROLLER('Register/addUser?r='.ENCRYPT('ICT')) ?>" method="post">
                                                 <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-name"></i> Fullname: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("fullname")?></span></label></div>
@@ -81,7 +81,7 @@
                                                             <option value="">SELECT SCHOOL/OFFICE</option>
                                                             <?php $SCHOOLS =  $this->school_tbl->getAll(); ?>
                                                             <?php foreach($SCHOOLS as $col): ?>
-                                                                <option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'] ?>"><?= $col['school'] ?></option>
+                                                                <option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'].' '.$col['department'] ?>"><?= $col['school'] ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                 </div>
@@ -130,7 +130,7 @@
                                                             <option value="">SELECT SCHOOL/OFFICE</option>
                                                             <?php $SCHOOLS =  $this->school_tbl->getAll(); ?>
                                                             <?php foreach($SCHOOLS as $col): ?>
-                                                                <option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'] ?>"><?= $col['school'] ?></option>
+                                                                <option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'].' '.$col['department'] ?>"><?= $col['school'] ?></option>
                                                             <?php endforeach; ?>
                                                         </select>
                                                 </div>

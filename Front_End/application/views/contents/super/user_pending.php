@@ -43,7 +43,7 @@
                             <button class="btn btn-danger" style="border-radius: 50%;height:28px; width:28px;text-align:center;padding:0px;font-size:0px;" onclick="ignoreUser('<?= ENCRYPT($col['emp_id']) ?>','<?= $col['fullname'] ?>', '<?= ENCRYPT($col['id_card']) ?>', '<?= ENCRYPT($col['username']) ?>')" data="" filename="" title="Ignore file"><span class="icon-copy dw dw-delete-3 text-white" style="font-size:16px;"></span></button>
                         </td>
                         <td><?= $col['fullname'] ?></td>
-                        <td><?= $col['school']." ".$col['campus'] ?></td>
+                        <td><?= $col['school']." ".$col['campus'].' '.$col['department'] ?></td>
                         <td><?= $col['username'] ?></td>
                         <td><a onclick="showFile('<?= STORAGE().$col['id_card'] ?>', 'School ID', false)"><button class="btn" title="ID CARD"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
                         <td><?= DATE_TRANSLATE($col['date']) ?></td>

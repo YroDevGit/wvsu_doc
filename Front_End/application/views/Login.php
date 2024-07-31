@@ -65,13 +65,13 @@
 								</div>
 							</div>
 
-                            <label style="color:gray;" for=""><i class="icon-copy dw dw-building1"></i> Office: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("office")?></span></label>
+                            <label style="color:gray;" for=""><i class="icon-copy dw dw-building1"></i> To school: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("office")?></span></label>
                             <div class="input-group1 custom">
 									<select class="selectpicker form-control" id="schoolSelect" data-live-search="true" name="office">
 										<option value="">SELECT SCHOOL/OFFICE</option>
 										<?php $SCHOOLS =  $this->school_tbl->getAll(); ?>
 										<?php foreach($SCHOOLS as $col): ?>
-											<option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'] ?>"><?= $col['school'] ?></option>
+											<option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'].' '.$col['department'] ?>"><?= $col['school'] ?></option>
 										<?php endforeach; ?>
 									</select>
 							</div>

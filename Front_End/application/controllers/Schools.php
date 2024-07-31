@@ -29,6 +29,7 @@ class Schools extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         SET_VALIDATION("full_name", "Complete name", "required");
         SET_VALIDATION("school_code", "School number", "required");
         SET_VALIDATION("address", "Address", "required");
+        SET_VALIDATION("department", "Department", "required");
         if(IS_VALIDATION_FAILED()){
            VALIDATION_FAILED_REDIRECT("Schools/AllSchools");
         }
