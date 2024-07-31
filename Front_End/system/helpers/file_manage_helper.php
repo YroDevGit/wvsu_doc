@@ -1,10 +1,14 @@
 <?php
  
  if(! function_exists("UPLOAD_FILE")){
-    function UPLOAD_FILE(string $inputname, $rename = "FALSE"){
+    function UPLOAD_FILE(string $inputname, string $rename = ""){
+        /** ==> Array
+         * upload file from form file picker.
+         */
         $filename = "";
         switch(strtoupper($rename)){
-            case "FALSE": $filename = basename($_FILES[$inputname]["name"]);break;
+            case null:
+            case "": $filename = basename($_FILES[$inputname]["name"]);break;
             case "TRUE_CY_AUTO_RENAME_FILE_1001005": $filename = YRO1005rename347auto1054663($inputname); break;
             default: $filename = $rename.".".GET_FILE_TYPE($inputname);break;
         }
@@ -24,6 +28,9 @@
  }
  if(! defined("CY_AUTO_RENAME_FILE")){
     define("CY_AUTO_RENAME_FILE", "TRUE_CY_AUTO_RENAME_FILE_1001005");
+ }
+ if(! defined("AUTO_RENAME_FILE")){
+    define("AUTO_RENAME_FILE", "TRUE_CY_AUTO_RENAME_FILE_1001005");
  }
 
  if(! function_exists("GET_FILE_NAME")){

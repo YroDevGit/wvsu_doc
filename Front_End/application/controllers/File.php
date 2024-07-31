@@ -231,7 +231,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
         else{
             $user_id =1; //GET_LOGIN_DATA($id);
-            $upload = UPLOAD_FILE("attfile", "TRUE");
+            $upload = UPLOAD_FILE("attfile", AUTO_RENAME_FILE);
             if($upload['code']!= CY_SUCCESS_CODE){
                 SET_FLASHDATA("file_status", $upload['message']);
             }
