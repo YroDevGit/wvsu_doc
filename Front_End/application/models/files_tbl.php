@@ -20,7 +20,7 @@
         public function getMyPendigFiles(){
             $school = $this->school_tbl->mySchool();
             $school_id = $school['id'];
-            $sql = "SELECT f.id, f.emp_id, f.`from`, e.fullname,f.caption, CONCAT(s.school,' ',s.campus)'school', f.doctype, f.details, f.purpose, f.receiving, f.`file`, DATE_FORMAT(f.date_created, '%M %d %Y')'date_created' FROM file f, emp e, school s WHERE (f.emp_id = e.id AND f.school = s.id AND e.school = s.id) or f.school = ? AND f.stat =0 and f.received_by = 0 GROUP BY f.id order by f.date_created DESC";
+            $sql = "SELECT f.id, f.emp_id, f.`from`, e.fullname,f.caption, CONCAT(s.school,' ',s.campus, ' ', s.department)'school', f.doctype, f.details, f.purpose, f.receiving, f.`file`, DATE_FORMAT(f.date_created, '%M %d %Y')'date_created' FROM file f, emp e, school s WHERE (f.emp_id = e.id AND f.school = s.id AND e.school = s.id) or f.school = ? AND f.stat =0 and f.received_by = 0 GROUP BY f.id order by f.date_created DESC";
             $param  = [$school_id];
             $result = CY_DB_SETQUERY($sql, $param);
             if($result['code'] == CY_SUCCESS_CODE){
@@ -31,7 +31,7 @@
         public function getMyFiles(){
             $school = $this->school_tbl->mySchool();
             $school_id = $school['id'];
-            $sql = "SELECT f.id, f.emp_id, f.`from`, e.fullname,f.caption, CONCAT(s.school,' ',s.campus)'school', f.doctype, f.details, f.purpose, f.receiving, f.`file`, DATE_FORMAT(f.date_created, '%M %d %Y')'date_created' FROM file f, emp e, school s WHERE (f.emp_id = e.id AND f.school = s.id AND e.school = s.id) or f.school = ? AND f.stat =0 and f.received_by != 0 GROUP BY f.id order by f.date_created DESC";
+            $sql = "SELECT f.id, f.emp_id, f.`from`, e.fullname,f.caption, CONCAT(s.school,' ',s.campus,' ', s.department)'school', f.doctype, f.details, f.purpose, f.receiving, f.`file`, DATE_FORMAT(f.date_created, '%M %d %Y')'date_created' FROM file f, emp e, school s WHERE (f.emp_id = e.id AND f.school = s.id AND e.school = s.id) or f.school = ? AND f.stat =0 and f.received_by != 0 GROUP BY f.id order by f.date_created DESC";
             $param  = [$school_id];
             $result = CY_DB_SETQUERY($sql, $param);
             if($result['code'] == CY_SUCCESS_CODE){
@@ -40,7 +40,7 @@
         }
 
         public function myFilesSent(){
-            $sql = "SELECT f.id, f.emp_id, f.received_by, f.caption, f.doctype, f.details, f.purpose, f.`file`, f.date_created, s.school, s.campus, s.full_name  FROM school s, file f WHERE f.school = s.id AND f.stat =0 AND f.emp_id = ?";
+            $sql = "SELECT f.id, f.emp_id, f.received_by, f.caption, f.doctype, f.details, f.purpose, f.`file`, f.date_created, s.school, s.campus, s.department , s.full_name  FROM school s, file f WHERE f.school = s.id AND f.stat =0 AND f.emp_id = ?";
             $param = [GET_LOGIN_DATA("emp_id")];
             $result = CY_DB_SETQUERY($sql, $param);
             SET_SESSION("LASTQUERY1", CY_DB_LAST_QUERY());
@@ -66,6 +66,14 @@
             $sql = "select * from myfile where stat = 0 and emp_id = ?";
             $param = [GET_LOGIN_DATA("emp_id")];
             $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code']==CY_SUCCESS){
+                return $result['data'];
+            }
+        }
+
+        public function getPublicFiles(){
+            $sql = "SELECT * FROM myfile where privacy = 0 and stat = 0";
+            $result = CY_DB_SETQUERY($sql);
             if($result['code']==CY_SUCCESS){
                 return $result['data'];
             }

@@ -55,6 +55,20 @@
             }
         }
 
+        public function getSchoolById($id, $col=""){
+            $sql = "select * from school where id = ?";
+            $param = [$id];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code']==CY_SUCCESS){
+                if($col=="" || $col==null){
+                    return $result['first_row'];
+                }
+                else{
+                    return $result['first_row'][$col];
+                }
+            }
+        }
+
         
         
         //add functions here...

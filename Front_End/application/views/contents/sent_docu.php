@@ -67,8 +67,8 @@
                         </td>
                         <td><div style="cursor:pointer;height: 20px; width: 20px; background-color: <?=$color?>;border-radius:50%;" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $label ?>" title="Status"></div></td>
                         <td><?= $col['caption'] ?></td>
-                        <td><?= $col['school']." ".$col['campus'] ?></td>
-                        <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', true, '<?=ENCRYPT($col['id'])?>'); trackViewer('<?=ENCRYPT($col['id'])?>')"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
+                        <td><?= $col['school']." ".$col['campus'].' '.$col['department'] ?></td>
+                        <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', true, '<?=ENCRYPT($col['id'])?>');"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['details'] ?>" title="Details">👁️</button></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['purpose'] ?>" title="Purpose">👁️</button></td>
                         <td><?= $col['date_created'] ?></td>
@@ -95,7 +95,7 @@
                         <option value="">SELECT SCHOOL/OFFICE</option>
                         <?php $SCHOOLS =  $this->school_tbl->getAll(false); ?>
                         <?php foreach($SCHOOLS as $col): ?>
-                            <option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'] ?>"><?= $col['school'] ?></option>
+                            <option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'].' '.$col['department'] ?>"><?= $col['school'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -271,24 +271,5 @@ async function showViews($file_id, $filename, $captionlabel){
     }
 }
 
-
-document.getElementById("download-button-cy-preview").addEventListener("click", async function(){
-        $id = document.getElementById("download-button-cy-preview").getAttribute("filenumber");
-        $param = {"id": $id};
-        $result = await axios.post("<?=CONTROLLER()?>File/download_doc", $param);
-        $data = $result.data;
-        if($data.code == 200){
-            SuccessMessage("File Downloaded");
-        }
-   });
-
-   async function trackViewer($id){
-        $param = {"file_id":$id};
-        $result = await axios.post("<?= CONTROLLER() ?>File/trackView", $param);
-        $status = $result.data;
-        if($status.code == 200){
-            console.log("abcd");
-        }
-   }
 </script>
     

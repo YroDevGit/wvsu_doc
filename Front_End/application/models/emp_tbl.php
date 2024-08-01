@@ -26,6 +26,20 @@
             }
         }
 
+        public function getEmployeeById($id, $col=""){
+            $sql = "select * from emp where id = ?";
+            $param = [$id];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code']==CY_SUCCESS){
+                if($col=="" || $col==null){
+                    return $result['first_row'];
+                }
+                else{
+                    return $result['first_row'][$col];
+                }
+            }
+        }
+
 
 
 

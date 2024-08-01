@@ -354,6 +354,11 @@
 						</a>
 					</li>
 					<li>
+						<a href="<?=CONTROLLER('File/PublicDocs')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-user-11"></span><span class="mtext">Public Documents</span>
+						</a>
+					</li>
+					<li>
 						<div class="dropdown-divider"></div>
 					</li>
 			

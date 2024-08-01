@@ -1,4 +1,4 @@
-<?php CY_ASSIGNED_ROLES(["ADMIN"]) ?>
+<?php CY_ASSIGNED_ROLES(["ICT"]) ?>
 <div class="page-header">
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -13,54 +13,39 @@
             </nav>
         </div>
         <div class="col-md-6 col-sm-12 text-right">
-            <!-- <button>ADD</button> -->
+            <button type="button" class="btn btn-primary" id="addbtn" data-toggle="modal" data-target="#bd-example-modal-lg05">ADD NEW FILE</button>
         </div>
     </div>
 </div>
 <div class="card-box mb-30">
     <div class="pd-20">
        
-        <h4 class="text-blue h4">Shared Documents</h4>
+        <h4 class="text-blue h4">School Public Documents</h4>
     </div>
     <div class="pb-20">
         <table class="table hover data-table-export nowrap" export="Files">
             <thead>
                 <tr>
                     <th></th>
-                    <th class="table-plus datatable-nosort">Action</th>
+                    <th class="table-plus datatable-nosort">Owner</th>
                     <th>Title</th>   
-                    <th>File</th>
                     <th>Details</th>
-                    <th>Purpose</th>
-                    <th class="">From</th>
-                    <th>Date</th> 
-                    <th>Document Type</th>
+                    <th>File</th>
+                    <th>Date created</th>
+                    <th>Hashtags</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($this->files_tbl->getMyFiles() as $col): ?>
-                    <?php $efullname =$this->emp_tbl->getEmployeeById($col['emp_id'], 'fullname'); ?>
+                <?php foreach($this->files_tbl->getPublicFiles() as $col): ?>
+                    <?php $ownder = $this->emp_tbl->getEmployeeById($col['emp_id'], "fullname"); ?>
                     <tr>
                         <td></td>
-                        <td>
-                            <div class="dropdown">
-                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                    <i class="dw dw-more"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#bd-example-modal-lg1" onclick="showViews('<?=ENCRYPT($col['id'])?>','<?=$col['file']?>','<?=$col['caption']?>')"><i class="dw dw-eye"></i> View History</a>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#bd-example-modal-lg" onclick="showDownloads('<?=ENCRYPT($col['id'])?>','<?=$col['file']?>','<?=$col['caption']?>')"><i class="dw dw-download"></i> Download History</a>
-                                    <a class="dropdown-item" href="#" onclick="hideFile('<?=ENCRYPT($col['id'])?>')"><i class="dw dw-delete-3"></i> Delete</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td><?= $col['caption'] ?></td>
-                        <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', true, '<?=ENCRYPT($col['id'])?>'); trackViewer('<?=ENCRYPT($col['id'])?>')"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
-                        <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['details'] ?>" title="Details">👁️</button></td>
-                        <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['purpose'] ?>" title="Purpose">👁️</button></td>
-                        <td title="<?=$efullname?>"><?= ($col['emp_id'] == 0) ? $col['from'] : $col['school'] ?></td>
-                        <td><?= $col['date_created'] ?></td>
-                        <td><?= $col['doctype'] ?></td>
+                        <td><?=(GET_LOGIN_DATA('emp_id')==$col['emp_id']) ? "<b class='text-primary'>ME</b>" : $ownder;?></td>
+                        <td><?= $col['file_title'] ?></td>
+                        <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['file_details'] ?>" title="Details">👁️</button></td>
+                        <td><a onclick="showFile('<?= STORAGE().$col['filename'] ?>', '<?= $col['file_title'] ?>', true, '<?=ENCRYPT($col['file_id'])?>'); "><button class="btn" title="<?= $col['file_title'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
+                        <td><?= $col['date_added'] ?></td>
+                        <td><?= $col['hash'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -69,34 +54,41 @@
 </div>
 
 
-<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg05" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myLargeModalLabel">Downloads</h4>
+                <h4 class="modal-title" id="myLargeModalLabel">Add new file</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <div style="padding:5px 10px 5px 10px;">
-                <span id="caption"></span>
-            </div>
-            <div style="padding:5px 10px 5px 10px;">
-                <span id="modaltitle"></span>
-            </div>
-            <div class="modal-body">
-                <table class="table hover data-table-export nowrap" id="downloadstable" export="DownloadFiles">
-                    <thead>
-                        <th>Name</th>
-                        <th>Download count</th>
-                        <th>Date</th>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            
+            <form action="<?=CONTROLLER()?>File/addMyFile" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <?php INPUT_FIELD("Title", "title", "Title") ?>
+                    <?php INPUT_FIELD("Details", "details", "Details") ?>
+                    <?php INPUT_FIELD("Hashtags", "hash", "Hashtags", "icon-copy dw dw-tag") ?>
+                    <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-attachment"></i> Attach file: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("attfile")?></span></label></div>
+                    <div class="input-group1 custom">
+                        <input type="file" class="form-control form-control-sm" placeholder="Attach file" name="attfile">
+                        <div class="input-group-append custom">
+                            <span class="input-group-text"></span>
+                        </div>
+                    </div>
+
+                    <label style="color:gray;" for=""><i class="icon-copy dw dw-key1"></i> Privacy: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("privacy")?></span></label>
+                    <div class="input-group1 custom">
+                        <select class="selectpicker form-control" id="schoolSelect" data-live-search="true" name="privacy">
+                            <option value="">SELECT PRIVACY</option>
+                            <option value="<?=ENCRYPT("0")?>">PUBLIC</option>
+                            <option value="<?=ENCRYPT("1")?>">PRIVATE</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -133,7 +125,20 @@
     </div>
 </div>
 
+<?php if(HAS_VALIDATION_ERRORS()): ?>
+    <script>PageLoaded(()=> Click("#addbtn"))</script>
+<?php endif; ?>
 
+<?php if(GET_FLASHDATA("status")): ?>
+    <?php if(GET_FLASHDATA("status")=="SUCCESS"): ?>
+        <script>PageLoaded(()=>SuccessMessage("Document added"));</script>
+    <?php endif; ?>
+    <?php if(GET_FLASHDATA("status")=="FAILED"): ?>
+        <script>PageLoaded(()=>ErrorMessage("Failed"));</script>
+    <?php endif; ?>
+<?php endif; ?>
+
+<style>.input-group1{padding-bottom: 10px;} .brand-logo a span{color:#1502bd;} .bootstrap-select .dropdown-toggle{height:38px;font-size: .875rem;}</style>
 
 <script>
     function dl_file($file){
@@ -158,6 +163,20 @@
             ErrorMessage("An error occurred while processing your request.");
         } 
     });
+    }
+
+    async function deleteDocu($id, $name){
+        ConfirmationMessage("Are you sure to delete file: "+$name+"?", async function(){
+            $param = {"id": $id, "name":$name};
+            $result = await axios.post("<?= CONTROLLER() ?>File/deleteMyFile", $param);
+            $status = $result.data;
+            if($status.code == 200){
+                SuccessMessage("Document deleted", "reload");
+            }
+            else{
+                ErrorMessage("Failed to delete document", "reload");
+            }
+        });
     }
 
 </script>
@@ -223,15 +242,7 @@ async function hideFile($file_id){
 }
 
 
-document.getElementById("download-button-cy-preview").addEventListener("click", async function(){
-        $id = document.getElementById("download-button-cy-preview").getAttribute("filenumber");
-        $param = {"id": $id};
-        $result = await axios.post("<?=CONTROLLER()?>File/download_doc", $param);
-        $data = $result.data;
-        if($data.code == 200){
-            SuccessMessage("File Downloaded");
-        }
-   });
+
 
    async function trackViewer($id){
         $param = {"file_id":$id};

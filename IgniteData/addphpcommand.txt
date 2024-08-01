@@ -1,4 +1,4 @@
-Step 2: Add PHP to the System PATH
+Add PHP to the System PATH
 Open the System Properties:
 
 Press Win + R, type sysdm.cpl, and press Enter.

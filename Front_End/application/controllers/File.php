@@ -215,6 +215,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
     }
 
+    
     public function addFile(){
         SET_VALIDATION("from", "From", "required");
         SET_VALIDATION("office", "Office", "required");
@@ -446,6 +447,23 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         $final = str_replace("\n", "", $model);
         $title = str_replace("\n", "", shell_exec('wmic computersystem get model'));
         return $all." ".$final." ".$title;
+    }
+
+
+    public function publicDocs(){
+        $data = [
+            "title" => "Public Documents",
+            "content" => "public_docs"
+        ];
+        CY_VIEW_PAGE("Main", $data);
+    }
+
+    public function DeptpublicDocs(){
+        $data = [
+            "title" => "Public Documents",
+            "content" => "public_docs"
+        ];
+        CY_VIEW_PAGE("Ict", $data);
     }
 
     /**
