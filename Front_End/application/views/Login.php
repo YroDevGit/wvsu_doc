@@ -30,7 +30,13 @@
 
 		gtag('config', 'UA-119386393-1');
 	</script>
+	<script>
+		$baseURL = "<?= CONTROLLER() ?>";
+	</script>
 </head>
+<div id="loading-effect" style="display:none;">
+	<div class="loader"></div>
+</div>
 <body class="login-page">
 	<div class="login-header box-shadow">
 		<div class="container-fluid d-flex justify-content-between align-items-center">
@@ -49,11 +55,16 @@
 	</div>
 	<div class="login-wrap d-flex  flex-wrap justify-content-center">
 		<div class="container">
+
 			<div class="row ">
+			<div class="col-md-6 col-lg-7">
+					<img src="<?= ASSETS() ?>img/login1.png" alt="">
+				</div>
+				<!--
 				<div class="col-md-6 col-lg-7">
 					<div class="bg-white box-shadow border-radius-10 col-md-10 pd-30">
                         <div class="login-title pb-20">
-							<h5 class="text-center text-primary">Submit Document (For Guest)</h5>
+							<h5 class="text-center text-primary">For Guest</h5>
 						</div>
                         <form class="CY_SUBMIT_ONCE" action="<?=CONTROLLER("File/addFile")?>" method="post" enctype="multipart/form-data">
 
@@ -134,10 +145,11 @@
                         </form>
                     </div>
 				</div>
+				-->
 				<div class="col-md-6 col-lg-5">
 					<div class="bg-white box-shadow border-radius-10 col-md-15 pd-30">
 						<div class="login-title pb-20">
-							<h5 class="text-center text-primary">Login To WVSU</h5>
+							<h5 class="text-center text-primary">LOGIN</h5>
 						</div>
 						<form method="post" action="<?= CONTROLLER("Login/Auth") ?>">
 						<div><label for="" style="color:gray;"><span class="text-danger"><?= VALIDATION_INPUT_ERROR("options") ?></span></label></div>
@@ -146,20 +158,19 @@
 									<label class="btn">
 										<input type="radio" name="options" value="<?=ENCRYPT("ADMIN")?>" id="admin">
 										<div class="icon"><img src="<?= ASSETS() ?>vendors/images/briefcase.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Admin
+										Department
 									</label>
 									<label class="btn">
 										<input type="radio" name="options" id="superadmin" value="<?=ENCRYPT("SUPERADMIN")?>">
 										<div class="icon"><i class="icon-copy dw dw-user-2" style="font-size:27px;color:white; background:#1b00ff;padding:1px 2px 1px 1px;border-radius:5px;"></i></div>
-										<span>I'm</span>
-										Web admin
+										
+										ADMIN
 									</label>
 									<label class="btn" style="margin-top: 10px;">
 										<input type="radio" name="options" id="user" value="<?=ENCRYPT("ICT")?>">
 										<div class="icon"><img src="<?= ASSETS() ?>vendors/images/person.svg" class="svg" alt=""></div>
-										<span>I'm</span>
-										Dept. Tech.
+										
+										USER
 									</label>
 								</div>
 							</div>
@@ -197,10 +208,17 @@
 										-->
 										<button class="btn btn-primary btn-lg btn-block" type="submit">Sign In</a>
 									</div>
+
+									<div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
+									<div class="input-group mb-0">
+										<a class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#bd-example-modal-lg0101012" >Email OTP</a>
+									</div>
+									<!--
 									<div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
 									<div class="input-group mb-0">
 										<a class="btn btn-outline-primary btn-lg btn-block" data-toggle="modal" data-target="#bd-example-modal-lg010101" id="startScanner">SCAN BARCODE</a>
 									</div>
+										-->
 								</div>
 							</div>
 						</form>
@@ -210,7 +228,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg010101" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg010101" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -224,12 +242,52 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg0101012" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered">
+		<div id="otpsent"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Email OTP</h4>
+                <button type="button" class="close" id="closemodax" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+				<form id="sendotp">
+					<div><label for="" style="color:gray;">Username/Email: </label></div>
+					<div class="input-group custom">
+						<input type="text" class="form-control form-control-lg" placeholder="Email" name="username" id="username" >
+						<div class="input-group-append custom">
+							<span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+						</div>
+					</div>
+					<div align="right"><button type="button" id="otpbtn" style="color:#1502bd;cursor:pointer;text-decoration:underline;border:none; background:transparent;">Send OTP</button></div>
+
+					<div><label for="" style="color:gray;">CODE: </label></div>
+					<div class="input-group custom">
+						<input type="text" class="form-control form-control-lg" placeholder="OTP code" name="otp" id="otp" >
+						<div class="input-group-append custom">
+							<span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
+						</div>
+					</div>
+					<div class="input-group mb-0">
+						<button type="submit" class="btn btn-outline-primary btn-lg btn-block" >Submit Email OTP</button>
+					</div>
+				</form>
+            </div>
+
+        </div>
+    </div>
+</div>
 	<!-- js -->
 	<script src="<?= ASSETS() ?>vendors/scripts/core.js"></script>
 	<script src="<?= ASSETS() ?>vendors/scripts/script.min.js"></script>
 	<script src="<?= ASSETS() ?>vendors/scripts/process.js"></script>
 	<script src="<?= ASSETS() ?>vendors/scripts/layout-settings.js"></script>
+	<script src="<?= ASSETS() ?>js/otp.js"></script>
 	<script src="<?=SRC()?>barcodescanner.js"></script>
+	<script src="<?= SRC() ?>loading.js"></script>
+
 </body>
 </html>
 <style>.input-group1{padding-bottom: 10px;} .brand-logo a span{color:#1502bd;} .bootstrap-select .dropdown-toggle{height:38px;font-size: .875rem;}</style>
@@ -335,7 +393,41 @@
 			}
 		}
 	});
+	
 </script>
+
+<style>
+	#loading-effect {
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		left: 0;
+		top: 0;
+		z-index: 2000;
+		background-color: rgba(0, 0, 0, 0.7);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.loader {
+	width: 60px;
+	aspect-ratio: 2;
+	--_g: no-repeat radial-gradient(circle closest-side,white 90%,#0000);
+	background: 
+		var(--_g) 0%   50%,
+		var(--_g) 50%  50%,
+		var(--_g) 100% 50%;
+	background-size: calc(100%/3) 50%;
+	animation: l3 1s infinite linear;
+	}
+	@keyframes l3 {
+		20%{background-position:0%   0%, 50%  50%,100%  50%}
+		40%{background-position:0% 100%, 50%   0%,100%  50%}
+		60%{background-position:0%  50%, 50% 100%,100%   0%}
+		80%{background-position:0%  50%, 50%  50%,100% 100%}
+	}
+</style>
 
 	
 

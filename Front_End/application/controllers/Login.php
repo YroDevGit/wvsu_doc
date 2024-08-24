@@ -65,6 +65,80 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
     }
 
+    public function sendOTP(){
+        $sql = "select * from users where username = ?";
+        $email = INPUT("username");
+        $param = [$email];
+        $result = CY_DB_SETQUERY($sql, $param);
+        if($result['code']==CY_SUCCESS){
+            $frow = $result['first_row'];
+            if(empty($frow)){
+                JSON_RESPONSE_DATA(-1, "FAILED", "Account not found.!", $frow);
+            }
+            else{
+                if($frow['active']==1){
+                    $code = CY_INT_CODE(5);
+                    $email_result = CY_SEND_PLAIN_EMAIL("WVSU login OTP", $email,"LOGIN OTP", "Your login OTP code is: ".$code);
+                    if($email_result['code']!=CY_SUCCESS){
+                        JSON_RESPONSE_DATA(-5, "FAILED", "Error occured when sending email OTP", $frow);
+                    }
+                    $this->addOTP($email, $code);
+                    JSON_RESPONSE_DATA(CY_SUCCESS, "SUCCESS", "Login success.!", $frow);
+                }
+                else{
+                    JSON_RESPONSE_DATA(101, "INACTIVE", "Account is not active, please contact administrator.!");
+                }  
+            }
+        }
+    }
+
+    public function addOTP($email, $code){
+        $sql = "delete from otp_code where email_address = ?";
+        $param = [$email];
+        CY_DB_SETQUERY($sql,$param);
+        $data = [
+            "email_address" => $email,
+            "otp_code" => $code,
+            "stat" => 0,
+            "otp_date" => date("Y-m-d h:i:s")
+        ];
+        $result = CY_DB_INSERT("otp_code", $data);
+        if($result['code'] == CY_SUCCESS){
+            return $result;
+        }
+    }
+
+    public function submitOTP(){
+        $email = INPUT("username");
+        $code = INPUT("otp");
+        $sql = "select * from otp_code where email_address = ? and otp_code = ?";
+        $param = [$email, $code];
+        $result = CY_SETQUERY($sql, $param);
+        if($result['code']==CY_SUCCESS){
+            $frow = $result['first_row'];
+            if(empty($frow)){
+                JSON_RESPONSE_DATA(-1, "FAILED", "Invalid OTP.!", $frow);
+            }
+            else{
+                $query = "select * from users where username = ?";
+                $dt = [$email];
+                $data = CY_SETQUERY($query, $dt);
+                if($data['code']==CY_SUCCESS){
+                    $data_first_row = $data['first_row'];
+                    SET_LOGIN(true, $data_first_row);
+                    JSON_RESPONSE_DATA(CY_SUCCESS, "SUCCESS", "OTP authentication success.!", $frow);
+                }
+                else{
+                    JSON_RESPONSE_DATA(101, "FAILED", "ERROR CODE1");
+                }
+            }
+            
+        }
+        else{
+            JSON_RESPONSE_DATA(101, "FAILED", "ERROR CODE2");
+        }
+    }
+
     public function scann(){
         $code = DECODE(POST('code'));
         $sql = "select * from users where code = ? and stat = 0  and active = 1";

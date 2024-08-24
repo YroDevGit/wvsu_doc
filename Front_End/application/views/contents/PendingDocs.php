@@ -44,8 +44,19 @@
                     <tr>
                         <td></td>
                         <td>
+                        <div class="dropdown">
+                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    <i class="dw dw-more"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                <a class="dropdown-item" href="#" onclick="ReceiveDoc(this)" data="<?= ENCRYPT($col['id']) ?>" title="Accept file"><i class="dw dw-check"></i> Accept</a>
+                                    <a class="dropdown-item" href="#" onclick="IgnoreDoc(this)" data="<?= ENCRYPT($col['id']) ?>" filename="<?= $col['file'] ?>" title="Ignore file"><i class="dw dw-delete-3"></i> Delete</a>
+                                </div>
+                            </div>
+                        <!--
                         <button class="btn btn-success" style="border-radius: 50%;height:28px; width:28px;text-align:center;padding:0px;font-size:0px;" onclick="ReceiveDoc(this)" data="<?= ENCRYPT($col['id']) ?>" title="Accept file"><span class="icon-copy ti-check-box text-white" style="font-size:16px;"></span></button>
                         <button class="btn btn-danger" style="border-radius: 50%;height:28px; width:28px;text-align:center;padding:0px;font-size:0px;" onclick="IgnoreDoc(this)" data="<?= ENCRYPT($col['id']) ?>" filename="<?= $col['file'] ?>" title="Ignore file"><span class="icon-copy dw dw-delete-3 text-white" style="font-size:16px;"></span></button>
+                        -->
                         </td>
                         <td><?=($col['emp_id']==0)? "<i class='icon-copy dw dw-user1' title='public user'></i> " : "<i class='icon-copy dw dw-building' title='$efullname'></i> "?><?= ($col['emp_id'] == 0) ? $col['from'] : $school ?></td>
                         <td><?= $col['caption'] ?></td>

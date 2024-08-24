@@ -321,7 +321,7 @@
 					</li>
 					<li>
 						<div align="center" class="text-white">
-							<div>SCHOOL ADMIN</div>
+							<div>DEPARTMENT ADMIN</div>
 							<div><small><?= $this->school_tbl->mySchool('full_name') ?></small></div>
 							<div><small><?= $this->school_tbl->mySchool('campus').' '.$this->school_tbl->mySchool('department') ?></small></div>
 						</div>
@@ -335,7 +335,7 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="<?= CONTROLLER("File") ?>">Pending</a></li>
-							<li><a href="<?= CONTROLLER("File/MyFiles") ?>">Shared Documents</a></li>
+							<li><a href="<?= CONTROLLER("File/MyFiles") ?>">Received Documents</a></li>
 							<li><a href="<?= CONTROLLER("File/sentFiles") ?>">Sent documents</a></li>
 						</ul>
 					</li>

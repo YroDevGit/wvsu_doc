@@ -64,7 +64,7 @@
 									<div class="tab-pane fade show active" id="home" role="tabpanel">
 										<div class="pd-20">
                                             <div class="login-title pb-20">
-                                                <h6 class="text-center text-primary">Register as Student</h6>
+                                                <h6 class="text-center text-primary">User</h6>
                                             </div>
                                             <form  enctype="multipart/form-data" action="<?= CONTROLLER('Register/addUser?r='.ENCRYPT('ICT')) ?>" method="post">
                                                 <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-name"></i> Fullname: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("fullname")?></span></label></div>
@@ -113,7 +113,7 @@
 									<div class="tab-pane fade" id="profile" role="tabpanel">
 										<div class="pd-20">
                                             <div class="login-title pb-20">
-                                                <h6 class="text-center text-success">Register as Admin</h6>
+                                                <h6 class="text-center text-success">Department</h6>
                                             </div>
                                             <form enctype="multipart/form-data" action="<?= CONTROLLER('Register/addUser?r='.ENCRYPT('ADMIN')) ?>" method="post">
                                                 <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-name"></i> Fullname: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("fullname")?></span></label></div>

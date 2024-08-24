@@ -57,7 +57,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
     public function MyFiles(){
         AUTHENTICATE_CY_USER(true);
         $page_data = [
-            "title" => "Shared Documents",
+            "title" => "Received Documents",
             "content" => "MyDocs"
         ];
         CY_SHOW_PAGE("Main", $page_data);
@@ -195,6 +195,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
                 "emp_id" => GET_LOGIN_DATA("emp_id"),
                 "from" => $this->EMPDATA['fullname'],
                 "sender_email" => GET_LOGIN_DATA("username"),
+                "from_school" => $this->school_tbl->getMySchool("id"),
                 "school" => DECODE(INPUT("office")),
                 "caption" => INPUT("caption"),
                 "doctype" => INPUT("doctype"),
@@ -286,7 +287,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         ];
         $set = [
             "received_by" => GET_LOGIN_DATA("emp_id"),
-            "date_received" => date("Y-m-d")
+            "date_received" => date("Y-m-d H:i:s")
         ];
         $result = CY_DB_UPDATE("file", $condition, $set);
         if($result['code'] == CY_SUCCESS_CODE){

@@ -46,6 +46,21 @@ class Schools extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
     }
 
+    public function remove(){
+
+        if(POST("id")=="" ||POST("id")==null){
+            JSON_RESPONSE_DATA(-1, "FAILED","Error deleting school data", POST_DATA());
+        }
+        else{
+            $id = DECODE(POST("id"));
+            $sql = "update school set stat = -1 where id = ?";
+            $param = [$id];
+            $result = CY_DB_SETQUERY($sql, $param);
+
+            JSON_RESPONSE_DATA(200, "SUCCESS","School deleted successfully", $result);
+        }
+    }
+
     /**
      * You can add more functions here
      */

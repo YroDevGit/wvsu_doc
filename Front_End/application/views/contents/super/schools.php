@@ -19,7 +19,7 @@
 </div>
 <div class="card-box mb-30">
     <div class="pd-20">
-        <h4 class="text-blue h4">Schools And Campuses</h4>
+        <h4 class="text-blue h4">Schools And Campuses </h4>
     </div>
     <div class="pb-20">
         <table class="table hover data-table-export nowrap" export="Files">
@@ -40,7 +40,16 @@
                 <?php foreach($this->school_tbl->getAllSchools() as $col): ?>
                     <tr>
                         <td></td>
-                        <td></td>
+                        <td>
+                        <div class="dropdown">
+                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                    <i class="dw dw-more"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                    <a class="dropdown-item" href="#" onclick="deleteSchool('<?=ENCRYPT($col['id'])?>')"><i class="dw dw-delete-3"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
                         <td><?=$col['school']?></td>
                         <td><?=$col['campus']?></td>
                         <td><?=$col['department']?></td>
@@ -141,4 +150,22 @@
         <script>PageLoaded(()=>SuccessMessage("Failed", "reload"))</script>
     <?php endif; ?>
 <?php endif; ?>
+
+
+<script>
+    async function deleteSchool($id){
+        ConfirmationMessage("Are you sure to proceed removing selected school?", async()=>{
+            $param = {"id": $id};
+            $res = await axios.post("<?= CONTROLLER() ?>Schools/remove", $param);
+            $result = $res.data;
+            if($result.code==200 || $result.code=="200"){
+                SuccessMessage($result.message, "reload");
+            }
+            else{
+                ErrorMessage($result.message);
+            }
+        });
+
+    }
+</script>
     

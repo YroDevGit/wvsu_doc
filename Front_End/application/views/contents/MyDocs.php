@@ -20,7 +20,7 @@
 <div class="card-box mb-30">
     <div class="pd-20">
        
-        <h4 class="text-blue h4">Shared Documents</h4>
+        <h4 class="text-blue h4">Receieved Documents</h4>
     </div>
     <div class="pb-20">
         <table class="table hover data-table-export nowrap" export="Files">
@@ -39,7 +39,11 @@
             </thead>
             <tbody>
                 <?php foreach($this->files_tbl->getMyFiles() as $col): ?>
-                    <?php $efullname =$this->emp_tbl->getEmployeeById($col['emp_id'], 'fullname'); ?>
+                    <?php if($col['emp_id']=="0"||$col['emp_id']==0): ?>
+                        <?php $efullname = $col['from'] ?>
+                    <?php else: ?>
+                        <?php $efullname = $col['from']; ?>
+                    <?php endif; ?>
                     <tr>
                         <td></td>
                         <td>
@@ -58,7 +62,7 @@
                         <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', true, '<?=ENCRYPT($col['id'])?>'); trackViewer('<?=ENCRYPT($col['id'])?>')"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['details'] ?>" title="Details">👁️</button></td>
                         <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $col['purpose'] ?>" title="Purpose">👁️</button></td>
-                        <td title="<?=$efullname?>"><?= ($col['emp_id'] == 0) ? $col['from'] : $col['school'] ?></td>
+                        <td><button type="button" class="btn  margin-5" data-container="body" data-toggle="popover" data-placement="top" data-content="<?=$efullname?>" title="Sender name"><?= $this->school_tbl->getMySchool("school")." ".$this->school_tbl->getMySchool("campus")." ".$this->school_tbl->getMySchool("department") ?> 👁️</button></td>
                         <td><?= $col['date_created'] ?></td>
                         <td><?= $col['doctype'] ?></td>
                     </tr>

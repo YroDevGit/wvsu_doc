@@ -69,6 +69,16 @@
             }
         }
 
+        public function getMySchool($col=""){
+            $school_id = $this->EMPDATA['school'];
+            if($col=="" || $col==null){
+                return $this->getSchoolById($school_id);
+            }
+            else{
+                return $this->getSchoolById($school_id, $col);
+            }
+        }
+
         
         
         //add functions here...

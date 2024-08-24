@@ -20,10 +20,10 @@ if(! function_exists("SELECTED_ROLES_TAB")){
             ?>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link text-blue" id="tab_home" data-toggle="tab" href="#home" role="tab" aria-selected="true">Student</a>
+                    <a class="nav-link text-blue" id="tab_home" data-toggle="tab" href="#home" role="tab" aria-selected="true">User</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-blue" id="tab_admin" data-toggle="tab" href="#profile" role="tab" aria-selected="false">Admin</a>
+                    <a class="nav-link text-blue" id="tab_admin" data-toggle="tab" href="#profile" role="tab" aria-selected="false">Department</a>
                 </li>
                 <li class="nav-item" style="display:none;">
                     <a class="nav-link text-blue" data-toggle="tab" href="#contact" role="tab" aria-selected="false">Contact</a>
@@ -36,10 +36,10 @@ if(! function_exists("SELECTED_ROLES_TAB")){
             ?>
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link text-blue" id="tab_home" data-toggle="tab" href="#home" role="tab" aria-selected="false">School Tech (ICT)</a>
+                    <a class="nav-link text-blue" id="tab_home" data-toggle="tab" href="#home" role="tab" aria-selected="false">User</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-blue" id="tab_admin" data-toggle="tab" href="#profile" role="tab" aria-selected="true">Admin</a>
+                    <a class="nav-link text-blue" id="tab_admin" data-toggle="tab" href="#profile" role="tab" aria-selected="true">Department</a>
                 </li>
                 <li class="nav-item" style="display:none;">
                     <a class="nav-link text-blue" data-toggle="tab" href="#contact" role="tab" aria-selected="false">Contact</a>
