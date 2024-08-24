@@ -7,6 +7,10 @@
          * send email.
          * Return result array
          */
+        if(! HAS_INTERNET_CONNECTION()){
+            $ret = ["code"=>101, "message"=>"No Internet Connection", "message_array"=>["Email Not sent", "No Internet Connection", "You are not connected to the internet", "Please make sure you are connected to the internet"]];
+            return $ret;
+        }
         include_once SYSTEM_DATA."Email_config.php";
         $ret = [];
         $CY =& get_instance();
@@ -53,6 +57,10 @@
          * send email.
          * Return result array
          */
+        if(! HAS_INTERNET_CONNECTION()){
+            $ret = ["code"=>101, "message"=>"No Internet Connection", "message_array"=>["Email Not sent", "No Internet Connection", "You are not connected to the internet", "Please make sure you are connected to the internet"]];
+            return $ret;
+        }
         include_once SYSTEM_DATA."Email_config.php";
         $ret = [];
         $CY =& get_instance();

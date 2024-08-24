@@ -37,10 +37,10 @@ document.getElementById("sendotp").addEventListener("submit", async function(eve
     $form_data = GetFormData("#sendotp");
     showLoading();
     $otp_sent = document.getElementById("otpsent").getAttribute("otp");
-    if(DECODE($otp_sent) != "YES"){
+    if($otp_sent==null || DECODE($otp_sent) != "YES"){
         hideLoading();
-        ErrorMessage("OTP is not yet sent, please send email OTP first.");
-        return 0;
+        ErrorMessage("OTP is not yet sent, please send login OTP first.");
+        return;
     }
 
     $res = await axios.post($baseURL+"Login/submitOTP", $form_data);

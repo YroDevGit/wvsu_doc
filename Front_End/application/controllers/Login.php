@@ -80,7 +80,7 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
                     $code = CY_INT_CODE(5);
                     $email_result = CY_SEND_PLAIN_EMAIL("WVSU login OTP", $email,"LOGIN OTP", "Your login OTP code is: ".$code);
                     if($email_result['code']!=CY_SUCCESS){
-                        JSON_RESPONSE_DATA(-5, "FAILED", "Error occured when sending email OTP", $frow);
+                        JSON_RESPONSE_DATA(-5, "FAILED", $email_result['message'], $email_result);
                     }
                     $this->addOTP($email, $code);
                     JSON_RESPONSE_DATA(CY_SUCCESS, "SUCCESS", "Login success.!", $frow);

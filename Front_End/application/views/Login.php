@@ -261,7 +261,7 @@
 							<span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
 						</div>
 					</div>
-					<div align="right"><button type="button" id="otpbtn" style="color:#1502bd;cursor:pointer;text-decoration:underline;border:none; background:transparent;">Send OTP</button></div>
+					<div align="right"><button type="button" id="otpbtn" style="color:#1502bd;cursor:pointer;text-decoration:underline;border:none; background:transparent;">Send login OTP</button></div>
 
 					<div><label for="" style="color:gray;">CODE: </label></div>
 					<div class="input-group custom">

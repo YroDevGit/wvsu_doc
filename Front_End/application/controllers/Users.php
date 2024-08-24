@@ -50,6 +50,9 @@ class Users extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         }
         $result = CY_DB_UPDATE("users", $condition, $set);
         $send_email = CY_SEND_PLAIN_EMAIL("West Visayas State University", $email, "User activated", "Hello ".$email.", Your account has been activated.<br><br>Username: ".$email."<br>Password: ".$newpass);
+        if($send_email['code'] != CY_SUCCESS){
+            JSON_RESPONSE($send_email);
+        }
         $emp_result = CY_DB_UPDATE("emp", ["id"=>$id], ["added_by" => CY_OBJECT_VALUE(GET_LOGIN_DATA("emp_id"),-1)]);
         if($result['code'] == CY_SUCCESS_CODE && $emp_result['code'] == CY_SUCCESS_CODE && $send_email['code']==CY_SUCCESS_CODE){
             ARRAY_APPEND_ELEMENT($result, "email", $email);
