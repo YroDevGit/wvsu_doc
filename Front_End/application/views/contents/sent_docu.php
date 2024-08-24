@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td><div style="cursor:pointer;height: 20px; width: 20px; background-color: <?=$color?>;border-radius:50%;" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $label." by [".$fullname."]" ?>" title="Status"></div></td>
+                        <td><div style="cursor:pointer;height: 20px; width: 20px; background-color: <?=$color?>;border-radius:50%;" data-container="body" data-toggle="popover" data-placement="top" data-content="<?= $label." by [".$fullname."]"." ".$col['date_received'] ?>" title="Status"></div></td>
                         <td><?= $col['caption'] ?></td>
                         <td><?= $col['school']." ".$col['campus'].' '.$col['department'] ?></td>
                         <td><a onclick="showFile('<?= STORAGE().$col['file'] ?>', '<?= $col['caption'] ?>', true, '<?=ENCRYPT($col['id'])?>');"><button class="btn" title="<?= $col['file'] ?>"><i class="icon-copy dw dw-eye text-primary" style="font-size: 22px;" aria-hidden="true"></i></button></a></td>

@@ -40,7 +40,7 @@
         }
 
         public function myFilesSent(){
-            $sql = "SELECT f.id, f.emp_id, f.received_by, f.caption, f.doctype, f.details, f.purpose, f.`file`, f.date_created, s.school, s.campus, s.department , s.full_name  FROM school s, file f WHERE f.school = s.id AND f.stat =0 AND f.emp_id = ?";
+            $sql = "SELECT f.id, f.emp_id, f.received_by, f.caption, f.doctype, f.details, f.purpose, f.`file`, f.date_created, s.school, s.campus, s.department , s.full_name, DATE_FORMAT(f.date_received, '%M %d %Y %h:%i %p') as 'date_received'  FROM school s, file f WHERE f.school = s.id AND f.stat =0 AND f.emp_id = ?";
             $param = [GET_LOGIN_DATA("emp_id")];
             $result = CY_DB_SETQUERY($sql, $param);
             SET_SESSION("LASTQUERY1", CY_DB_LAST_QUERY());
