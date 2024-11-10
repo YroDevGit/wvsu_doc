@@ -39,6 +39,17 @@
             }
         }
 
+        public function getMyFilesByDate($date){
+            $school = $this->school_tbl->mySchool();
+            $school_id = $school['id'];
+            $sql = "SELECT f.id, f.emp_id, f.`from`, e.fullname,f.caption, CONCAT(s.school,' ',s.campus,' ', s.department)'school', f.doctype, f.details, f.purpose, f.receiving, f.`file`, DATE_FORMAT(f.date_created, '%M %d %Y')'date_created' FROM file f, emp e, school s WHERE (f.emp_id = e.id AND f.school = s.id AND e.school = s.id) or f.school = ? AND f.stat =0 and f.received_by != 0 and f.date_created like '%$date%' GROUP BY f.id order by f.date_created DESC";
+            $param  = [$school_id];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code'] == CY_SUCCESS_CODE){
+                return $result['data'];
+            }
+        }
+
         public function myFilesSent(){
             $sql = "SELECT f.id, f.emp_id, f.received_by, f.caption, f.doctype, f.details, f.purpose, f.`file`, f.date_created, s.school, s.campus, s.department , s.full_name, DATE_FORMAT(f.date_received, '%M %d %Y %h:%i %p') as 'date_received'  FROM school s, file f WHERE f.school = s.id AND f.stat =0 AND f.emp_id = ?";
             $param = [GET_LOGIN_DATA("emp_id")];

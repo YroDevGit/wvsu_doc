@@ -40,7 +40,7 @@
                     <tr>
                         <td></td>
                         <td>
-
+                            <a onclick="return confirm('are you sure to deactivate selected user?')" href="<?=CONTROLLER('Users/disableUser?id='.ENCRYPT($col['user_id']))?>"><button class="btn btn-danger">DISABLE</button></a>
                         </td>
                         <td><?= $col['fullname'] ?></td>
                         <td><?= $col['school']." ".$col['campus'] ?></td>
@@ -86,4 +86,8 @@
 </script>
 
 <body>
+
+<?php if(GET_FLASHDATA("disable")): ?>
+    <script>PageLoaded(()=>SuccessMessage("User account has been deactivated."));</script>
+<?php endif; ?>
     

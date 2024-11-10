@@ -1,6 +1,6 @@
 <?php CY_ASSIGNED_ROLES(["ADMIN"]) ?>
 <div class="page-header">
-    <div class="row">
+    <div class="row"> 
         <div class="col-md-6 col-sm-12">
             <div class="title">
                 <h4><?= CY_STRING_VALUE($title) ?></h4>
@@ -19,8 +19,8 @@
 </div>
 <div class="card-box mb-30">
     <div class="pd-20">
-       
-        <h4 class="text-blue h4">Receieved Documents</h4>
+       <?php $auth = "5773552"; ?>
+        <h4 class="text-blue h4">Receieved Documents <form method="post" action="<?=CY_CONTROLLER('File/MyFiles?arg=1?id='.ENCRYPT($auth))?>"><input type="month" class="dfilter" name="dfilter" style="width: 200px;" value="<?=$param ?? null?>"><button class="dsubmit" type="submit">SEARCH</button></form></h4>
     </div>
     <div class="pb-20">
         <table class="table hover data-table-export nowrap" export="Files">
@@ -38,7 +38,15 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach($this->files_tbl->getMyFiles() as $col): ?>
+                <?php 
+                $alldata = null;
+                if(isset($_GET['arg'])){
+                    $alldata = $this->files_tbl->getMyFilesByDate($param);
+                }else{
+                    $alldata = $this->files_tbl->getMyFiles();
+                }
+                ?>
+                <?php foreach($alldata as $col): ?>
                     <?php if($col['emp_id']=="0"||$col['emp_id']==0): ?>
                         <?php $efullname = $col['from'] ?>
                     <?php else: ?>
@@ -246,4 +254,14 @@ document.getElementById("download-button-cy-preview").addEventListener("click", 
         }
    }
 </script>
+
+<style>
+    .dfilter{
+        border-color:#dedede;
+        border-radius: 3px;
+    }
+    .dsubmit{
+        border-color:#dedede;
+    }
+</style>
     

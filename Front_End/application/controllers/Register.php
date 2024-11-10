@@ -76,7 +76,11 @@ class Register extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
             }
             else{
                 SET_FLASHDATA("register_status", $user_status['message']);
+                if($user_status['status']['code']==1062){
+                    SET_FLASHDATA("register_status", "DUPLICATE");
+                }
             }
+           
             CY_DB_TRACKER_COMPLETE();
             CY_REDIRECT("Register");
         }

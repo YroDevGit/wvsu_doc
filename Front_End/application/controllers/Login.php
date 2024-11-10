@@ -16,6 +16,7 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
 
     public function index() 
     {
+        
         if(USER_HAS_LOGGED_IN()){
             CY_REDIRECT("File");
         }
@@ -23,6 +24,12 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
             $data['title'] =  "Login";
             CY_VIEW("Login", $data);
         }
+        
+    }
+
+    public function sendMail(){
+        $result = CY_SEND_PLAIN_EMAIL("Tyrone", "tyronemalocon@gmail.com", "Subject", "content");
+        P($result);
     }
 
     
@@ -50,6 +57,7 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
                 }
                 else{
                     if($data['active'] == 1){
+                        $this->logs->addLogs("USER LOGIN", "USER ID: ".$data['user_id']." has been logged in");
                         SET_LOGIN(true, $data);
                         SET_FLASHDATA("status", "SUCCESS");
                     }
@@ -162,6 +170,8 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
     }
 
     public function AuthLogout(){
+        $id=GET_LOGIN_DATA('user_id');
+        $this->logs->addLogs("USER LOGIN", "USERID: ".$id." has been logged out");
         LOG_OUT();
         CY_REDIRECT("Login");
     }

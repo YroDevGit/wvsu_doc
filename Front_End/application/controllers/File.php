@@ -55,10 +55,15 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
     }
 
     public function MyFiles(){
-        AUTHENTICATE_CY_USER(true);
+        AUTHENTICATE_CY_USER(true); 
+        $param = null;
+        if(isset($_GET['arg'])){
+            $param = POST('dfilter');
+        }
         $page_data = [
             "title" => "Received Documents",
-            "content" => "MyDocs"
+            "content" => "MyDocs",
+            "param" => $param
         ];
         CY_SHOW_PAGE("Main", $page_data);
     } 
@@ -210,6 +215,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
 
             $result = CY_DB_INSERT("file", $request_data);
             if($result['code']==CY_SUCCESS){
+                $this->logs->addLogs("SEND FILE",$request_data['emp_id']." sent file to school id".$request_data['school']);
                 $data = ["send_status"=>"success", "message" => "Document sent"]; 
                 CY_BACK_TO_PREVIOUS_PAGE($data);
             }
@@ -257,6 +263,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
                 if($result['code']==CY_SUCCESS_CODE){
                     
                     if($upload['code'] == CY_SUCCESS){
+                        $this->logs->addLogs("ADD FILE",$data['emp_id']." add new file");
                         SET_FLASHDATA("file_status", "SUCCESS");
                     }
                     else{

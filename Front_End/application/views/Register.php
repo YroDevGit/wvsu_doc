@@ -207,6 +207,8 @@
 
     <script>PageLoaded(()=>SuccessMessage("Registration request sent."));</script>
 
+	<?php elseif(GET_FLASHDATA("register_status")=="DUPLICATE"): ?>
+		<script>PageLoaded(()=> ErrorMessage("Email address already exist.!"))</script>
     <?php else: ?>
         <script>PageLoaded(()=> ErrorMessage("<?= GET_FLASHDATA("register_status") ?>"))</script>
     <?php endif; ?>
