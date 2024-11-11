@@ -474,6 +474,51 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         CY_VIEW_PAGE("Ict", $data);
     }
 
+    function Registry(){
+        $data = [
+            "title" => "Registry sheet",
+            "content" => "registry"
+        ];
+        CY_VIEW_PAGE("Super", $data);
+    }
+
+    function addRegistry(){
+        $_POST['user'] = GET_LOGIN_DATA("user_id");
+        $data = $_POST;
+        $result = CY_DB_INSERT("registry", $data);
+        if($result['code']==SUCCESS_CODE){
+            CY_REDIRECT("File/Registry");
+        }else{
+            print_r($result);
+            exit;
+        }
+    }
+
+    function deleteRegistry(){
+        $id = $_GET['id'];
+        $sql = "delete from registry where id = ?";
+        $param = [$id];
+        $result = CY_SETQUERY($sql, $param);
+        if($result['code'] == SUCCESS_CODE){
+            CY_REDIRECT("File/Registry");
+        }else{
+            print_r($result);
+        }
+    }
+
+    function alldocu(){
+        $param = null;
+        if(isset($_GET['arg'])){
+            $param = POST('dfilter');
+        }
+        $data = [
+            "title" => "All documents",
+            "content" => "alldocuments",
+            "param" => $param
+        ];
+         CY_VIEW_PAGE("Super", $data);
+    }
+
     /**
      * You can add more functions here
      */

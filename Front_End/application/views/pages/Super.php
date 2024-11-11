@@ -293,7 +293,16 @@
 							<span class="micon dw dw-building"></span><span class="mtext">All Schools</span>
 						</a>
 					</li>
-
+					<li>
+						<a href="<?=CONTROLLER('File/alldocu')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-building"></span><span class="mtext">All documents</span>
+						</a>
+					</li>
+					<li>
+						<a href="<?=CONTROLLER('File/Registry')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-building"></span><span class="mtext">Registry Sheet</span>
+						</a>
+					</li>
 					<li>
 						<div class="dropdown-divider"></div>
 					</li>
