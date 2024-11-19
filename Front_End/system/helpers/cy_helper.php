@@ -1875,6 +1875,7 @@ if(! function_exists("CY_BACK_TO_PREVIOUS_PAGE")){
         /** ==> Void
          *  Redirect to previous page
          */
+        
         CY_REDIRECT(GET_PREVIOUS_PAGE(),$data, $oldvalue, $delay);
     }
 }

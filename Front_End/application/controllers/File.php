@@ -479,12 +479,13 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
             "title" => "Registry sheet",
             "content" => "registry"
         ];
-        CY_VIEW_PAGE("Super", $data);
+        CY_VIEW_PAGE("Main", $data);
     }
 
     function addRegistry(){
         $_POST['user'] = GET_LOGIN_DATA("user_id");
         $data = $_POST;
+        $data['school'] = $this->EMPDATA['school'];
         $result = CY_DB_INSERT("registry", $data);
         if($result['code']==SUCCESS_CODE){
             CY_REDIRECT("File/Registry");

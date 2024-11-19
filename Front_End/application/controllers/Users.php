@@ -112,6 +112,56 @@ class Users extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         $this->logs->addLogs("USER DISABLED","user id $id is disabled");
         CY_REDIRECT("users/activeUsers");
     }
+
+    function getMyPassword(){
+        $sql = "select * from users where emp_id = ?";
+        $param = [$this->EMPDATA['id']];
+        $res = CY_DB_SETQUERY($sql, $param);
+        return $res['data'][0]['password'];
+    }
+
+    function changePass(){
+       $errors = [];
+       if($_POST['cpassword'] == ""|| $_POST['cpassword']==null){
+            $errors['cpassword'] = "Current password is required";
+       }
+       if($_POST['npassword'] == ""|| $_POST['npassword']==null){
+            $errors['npassword'] = "New password is required";
+        }
+        if($_POST['rpassword'] == ""|| $_POST['rpassword']==null){
+            $errors['rpassword'] = "Re-enter password is required";
+        }
+       if(! empty($errors)){
+        $_SESSION['changepass'] = 1;
+        $_SESSION['input_error'] = $errors;
+        //display($_SESSION['input_error']);
+         CY_BACK_TO_PREVIOUS_PAGE([],true);
+       }else{
+        $cpass =  POST('cpassword');
+        $npass = POST("npassword");
+        $rpass = POST("rpassword");
+        if($cpass != $this->getMyPassword()){
+            $_SESSION['changepass'] = 3;
+            CY_BACK_TO_PREVIOUS_PAGE([],true);
+        }
+        if($npass === $rpass){
+
+            $sql = "update users set password = ? where emp_id = ?";
+            $param = [$npass,$this->EMPDATA['id']];
+            $result = CY_DB_SETQUERY($sql, $param);
+            if($result['code']==CY_SUCCESS){
+                $_SESSION['changepass'] = 200;
+                CY_BACK_TO_PREVIOUS_PAGE();
+            }
+            else{
+                DISPLAY($result);
+            }
+        }else{
+            $_SESSION['changepass'] = 2;
+            CY_BACK_TO_PREVIOUS_PAGE();
+        }
+       } 
+    }
     /**
      * You can add more functions here
      */

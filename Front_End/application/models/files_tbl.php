@@ -107,8 +107,8 @@
         }
 
         public function getRegistry($id){
-            $sql = "select * from registry where user = ? order by date_received desc";
-            $param = [$id];
+            $sql = "select * from registry where school = ? order by date_received desc";
+            $param = [$this->EMPDATA['school']];
             $result = CY_DB_SETQUERY($sql, $param);
             if($result['code']==SUCCESS_CODE){
                 return $result['data'];

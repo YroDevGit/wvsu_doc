@@ -192,10 +192,11 @@
 						<!-- EMPDATA is inside the application/auto/controller_loader -->
 					</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
-						<a style="cursor: pointer;" class="dropdown-item" data-toggle="modal" data-target="#bd-example-modal-lg1222"><i class="icon-copy fa fa-barcode"></i> Login Barcode</a>
-						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
-						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
+						<a style="cursor: pointer;display:none;" class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
+						<a style="cursor: pointer;display:none;" class="dropdown-item" data-toggle="modal" data-target="#bd-example-modal-lg1222" style="display: none;"><i class="icon-copy fa fa-barcode"></i> Login Barcode</a>
+						<a style="cursor: pointer;" class="dropdown-item" data-toggle="modal" id="changepassbtn" data-target="#bd-example-modal-lg12223"><i class="icon-copy fa fa-lock"></i> Change Password</a>
+						<a style="cursor: pointer;display:none;" class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
+						<a style="cursor: pointer;display:none;" class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
 						<a class="dropdown-item" href="<?= CONTROLLER("Login/AuthLogout") ?>"><i class="dw dw-logout"></i> Log Out</a>
 					</div>
 				</div>
@@ -226,6 +227,42 @@
 </div>
 
 <!-- END BARCODE -->
+
+<!-- START CHANGE PASS -->
+<div class="modal fade bs-example-modal-lg" id="bd-example-modal-lg12223" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">Change Password</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <form action="<?=CONTROLLER()?>Users/changePass" method="post">
+				<div class="modal-body" >
+				<div align="center" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; user-select: none;"><?=GET_LOGIN_DATA("username")?></div>
+				<div style="padding-top: 20px;">
+					<div class="rw">
+						<div>Current Password: <span class="text-danger"><?= $_SESSION['input_error']['cpassword'] ?? null ?></span></div>
+						<input type="password" class="form-control" name="cpassword">
+					</div>
+					<div class="rw">
+						<div>New Password: <span class="text-danger"><?= $_SESSION['input_error']['npassword'] ?? null ?></span></div>
+						<input type="password" class="form-control" name="npassword">
+					</div>
+					<div class="rw">
+						<div>Re-Enter Password: <span class="text-danger"><?= $_SESSION['input_error']['rpassword'] ?? null ?></span></div>
+						<input type="password" class="form-control" name="rpassword">
+					</div>
+				</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Update</button>
+				</div>
+			</form>
+        </div>
+    </div>
+</div>
+<style> .rw{padding: 5px;}</style>
+<!-- END CHANGE PASS -->
 
 
 
@@ -359,6 +396,11 @@
 						</a>
 					</li>
 					<li>
+						<a href="<?=CONTROLLER('File/Registry')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-analytics-17"></span><span class="mtext">Registry</span>
+						</a>
+					</li>
+					<li>
 						<div class="dropdown-divider"></div>
 					</li>
 			
@@ -419,3 +461,26 @@
         });
 		})
     </script>
+
+	<?php if(isset($_SESSION['changepass'])): ?>
+		<?php if($_SESSION['changepass']==200): ?>
+			<script>window.addEventListener("load", ()=>SuccessMessage("Password has been changed.!"));</script>
+		<?php elseif($_SESSION['changepass']==2): ?>
+			<script>window.addEventListener("load", function(){
+				ErrorMessage("Password Not Matched");
+				document.getElementById('changepassbtn').click();
+			});</script>
+		<?php elseif($_SESSION['changepass']==1): ?>
+		<script>window.addEventListener("load", function(){
+			document.getElementById('changepassbtn').click();
+		});</script>
+		<?php elseif($_SESSION['changepass']==3): ?>
+		<script>window.addEventListener("load", function(){
+			ErrorMessage("Incorrect Password");
+			document.getElementById('changepassbtn').click();
+		});</script>
+		<?php endif; ?>
+	<?php endif; ?>
+
+	<?php if(isset($_SESSION['input_error'])){unset($_SESSION['input_error']);} ?>
+	<?php if(isset($_SESSION['changepass'])){unset($_SESSION['changepass']);} ?>
