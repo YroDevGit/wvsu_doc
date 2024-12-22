@@ -19,7 +19,7 @@
 </div>
 <div class="card-box mb-30">
     <div class="pd-20">
-        <h4 class="text-blue h4">Schools And Campuses </h4>
+        <h4 class="text-blue h4">Schools Department and office </h4>
     </div>
     <div class="pb-20">
         <table class="table hover data-table-export nowrap" export="Files">
@@ -28,8 +28,7 @@
                     <th class="table-plus datatable-nosort"></th>
                     <th class="table-plus datatable-nosort">Action</th>
                     <th>School</th>   
-                    <th>Campus</th>
-                    <th>Department</th>
+                    <th>Department/Office</th>
                     <th>School name</th>
                     <th>School number</th>
                     <th>Facebook link</th>
@@ -51,7 +50,6 @@
                             </div>
                         </td>
                         <td><?=$col['school']?></td>
-                        <td><?=$col['campus']?></td>
                         <td><?=$col['department']?></td>
                         <td><?=$col['full_name']?></td>
                         <td><?=$col['school_code']?></td>
@@ -83,15 +81,15 @@
                     </div>
                 </div>
 
-                <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Campus: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("campus")?></span></label></div>
-                <div class="input-group1 custom">
-                    <input type="text" class="form-control form-control-sm" placeholder="Campus" name="campus">
+                <div style="display: none;"><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Campus: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("campus")?></span></label></div>
+                <div style="display: none;" class="input-group1 custom">
+                    <input type="text" class="form-control form-control-sm" placeholder="Campus" name="campus" value="himamaylan">
                     <div class="input-group-append custom">
                         <span class="input-group-text"></i></span>
                     </div>
                 </div>
 
-                <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Department: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("department")?></span></label></div>
+                <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Department/Office: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("department")?></span></label></div>
                 <div class="input-group1 custom">
                     <input type="text" class="form-control form-control-sm" placeholder="Department" name="department">
                     <div class="input-group-append custom">

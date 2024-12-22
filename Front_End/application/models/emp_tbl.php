@@ -31,10 +31,18 @@
             $param = [$id];
             $result = CY_DB_SETQUERY($sql, $param);
             if($result['code']==CY_SUCCESS){
-                if($col=="" || $col==null){
-                    return $result['first_row'];
+                $rescol = $result['first_row'];
+                if($col!="" && $col!=null){
+                    if(empty($rescol)){
+                        return "UNKNOWN USER";
+                    }else{
+                        return $rescol[$col];
+                    }
                 }
                 else{
+                    if(empty($rescol)){
+                        return [];
+                    }
                     return $result['first_row'][$col];
                 }
             }

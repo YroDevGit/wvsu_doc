@@ -88,6 +88,16 @@
             </div>
             <form action="<?=CONTROLLER()?>File/addRegistry" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
+                <label style="color:gray;" for=""><i class="icon-copy dw dw-building1"></i> School/Office: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("office")?></span></label>
+                <div class="input-group1 custom">
+                    <select class="selectpicker form-control" id="schoolSelect" data-live-search="true" name="office">
+                        <option value="">SELECT SCHOOL/OFFICE</option>
+                        <?php $SCHOOLS =  $this->school_tbl->getAll(false); ?>
+                        <?php foreach($SCHOOLS as $col): ?>
+                            <option value="<?=ENCRYPT($col['id'])?>" data-subtext="<?= $col['campus'].' '.$col['department'] ?>"><?= $col['school'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                     <?php INPUT_FIELD("Controll number", "control_number", "Controll number") ?>
                     <?php DATE_FIELD("Date Recieved", "date_received") ?>
                     <?php INPUT_FIELD("Source/Address", "source", "Source/Address", "icon-copy dw dw-tag") ?>

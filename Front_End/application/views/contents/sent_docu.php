@@ -43,6 +43,7 @@
                     <?php
                      $recieved = $col['received_by'];
                      $fullname = $this->emp_tbl->getEmployeeById($recieved, "fullname");
+                     //echo CY_DB_LAST_QUERY();
                      $color = "";
                      $label = "";
                      if($recieved==0){
@@ -109,7 +110,7 @@
                     </div>
                 </div>
 
-                <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Title/Caption: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("caption")?></span></label></div>
+                <div><label style="color:gray;font-size:14px;" for=""><i class="icon-copy dw dw-file"></i> Control number: <span class="text-danger"><?=VALIDATION_INPUT_ERROR("caption")?></span></label></div>
                 <div class="input-group1 custom">
                     <input type="text" class="form-control form-control-sm" placeholder="Title" name="caption">
                     <div class="input-group-append custom">

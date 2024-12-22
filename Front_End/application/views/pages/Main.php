@@ -397,7 +397,7 @@
 					</li>
 					<li>
 						<a href="<?=CONTROLLER('File/Registry')?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-analytics-17"></span><span class="mtext">Registry</span>
+							<span class="micon dw dw-analytics-17"></span><span class="mtext">Sent Files</span>
 						</a>
 					</li>
 					<li>
