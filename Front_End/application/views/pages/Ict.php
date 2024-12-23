@@ -373,20 +373,27 @@
 					<li>
 						<div class="dropdown-divider"></div>
 					</li>
-					
+
+
 					<li>
 						<a href="<?= CONTROLLER("File") ?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-file-72"></span><span class="mtext">Shared documents</span>
+							<span class="micon dw dw-file-72"></span><span class="mtext">Received Documents</span>
+						</a>
+					</li>
+					
+					<li>
+						<a href="<?= CONTROLLER("File/userFiles") ?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-file-72"></span><span class="mtext">Shared E-documents</span>
 						</a>
 					</li>
 					<li>
 						<a href="<?= CONTROLLER("File/ICTFile") ?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-file-72"></span><span class="mtext">My documents</span>
+							<span class="micon dw dw-file-72"></span><span class="mtext">My E-documents</span>
 						</a>
 					</li>
-					<li>
+					<li style="display: none;">
 						<a href="<?= CONTROLLER("File/DeptpublicDocs") ?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-user-11"></span><span class="mtext">Public documents</span>
+							<span class="micon dw dw-user-11"></span><span class="mtext">Public E-documents</span>
 						</a>
 					</li>
 					<li>

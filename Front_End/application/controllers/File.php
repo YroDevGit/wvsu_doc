@@ -14,32 +14,46 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
     
     // This is a Front_End controller (Manage User interface and fetch data from Back End to display).
 
-    public function index() 
+    public function index()  
     {
         AUTHENTICATE_CY_USER(true);
         $role = GET_LOGIN_DATA("type");
         if($role=="ADMIN"){
-            $page_data = [
-                "title" => "Pending Documents",
-                "content" => "PendingDocs"
-            ];
-            CY_SHOW_PAGE("Main", $page_data);
+            CY_REDIRECT("File/Registry");
         }
         if($role=="SUPERADMIN"){
             CY_REDIRECT("Users/AdminPending");
         }
         if($role=="ICT"){
             $page_data = [
-                "title" => "Shared documents",
-                "content" => "Schooldocs"
+                "title" => "Received documents",
+                "content" => "received_docs"
             ];
             CY_SHOW_PAGE("Ict", $page_data);
         }
     }
 
+
+    public function allRegistry(){
+        $page_data = [
+            "title" => "All Received documents",
+            "content" => "allRegistry"
+        ];
+        CY_SHOW_PAGE("Super", $page_data);
+    }
+
+
+    public function userFiles(){
+        $page_data = [
+            "title" => "Shared documents",
+            "content" => "Schooldocs"
+        ];
+        CY_SHOW_PAGE("Ict", $page_data);
+    }
+
     public function sentFiles(){
         $data = [
-            "title" => "Sent files",
+            "title" => "Sent E-Documents",
             "content" => "sent_docu"
         ];
         CY_SHOW_PAGE("Main", $data);
@@ -61,7 +75,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
             $param = POST('dfilter');
         }
         $page_data = [
-            "title" => "Received Documents",
+            "title" => "Received E-Documents",
             "content" => "MyDocs",
             "param" => $param
         ];
@@ -476,7 +490,7 @@ class File extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
 
     function Registry(){
         $data = [
-            "title" => "Registry sheet",
+            "title" => "Received Documents",
             "content" => "registry"
         ];
         CY_VIEW_PAGE("Main", $data);

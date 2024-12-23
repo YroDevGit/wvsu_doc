@@ -322,8 +322,14 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="<?= CONTROLLER("Users/AdminPending") ?>">Pending Request</a></li>
-							<li><a href="<?= CONTROLLER("Users/ActiveUsers") ?>">All Users</a></li>
+							<li><a href="<?= CONTROLLER("Users/AdminAccept") ?>">All Users</a></li>
 						</ul>
+					</li>
+
+					<li>
+						<a href="<?=CONTROLLER('File/allRegistry')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-file"></span><span class="mtext">Document Tracking</span>
+						</a>
 					</li>
 					<li>
 						<a href="<?=CONTROLLER('Schools/AllSchools')?>" class="dropdown-toggle no-arrow">
@@ -332,7 +338,7 @@
 					</li>
 					<li>
 						<a href="<?=CONTROLLER('File/alldocu')?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-building"></span><span class="mtext">All documents</span>
+							<span class="micon dw dw-computer"></span><span class="mtext">All E-documents</span>
 						</a>
 					</li>
 <!-- 

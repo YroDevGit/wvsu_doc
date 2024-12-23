@@ -366,14 +366,19 @@
 					<li>
 						<div class="dropdown-divider"></div>
 					</li>
+					<li>
+						<a href="<?=CONTROLLER('File/Registry')?>" class="dropdown-toggle no-arrow">
+							<span class="micon dw dw-analytics-17"></span><span class="mtext">Received Documents</span>
+						</a>
+					</li>
 					<li class="dropdown">
 						<a href="javascript:;" class="dropdown-toggle">
-							<span class="micon dw dw-file-72"></span><span class="mtext">Documents</span>
+							<span class="micon dw dw-file-72"></span><span class="mtext">E-Documents</span>
 						</a>
 						<ul class="submenu">
 							<li><a href="<?= CONTROLLER("File") ?>">Pending</a></li>
-							<li><a href="<?= CONTROLLER("File/MyFiles") ?>">Received Documents</a></li>
-							<li><a href="<?= CONTROLLER("File/sentFiles") ?>">Sent documents</a></li>
+							<li><a href="<?= CONTROLLER("File/MyFiles") ?>">Received E-Documents</a></li>
+							<li><a href="<?= CONTROLLER("File/sentFiles") ?>">Sent E-documents</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
@@ -385,21 +390,18 @@
 							<li><a href="<?= CONTROLLER("Users/ActiveUsers") ?>">All Users</a></li>
 						</ul>
 					</li>
+					
 					<li>
 						<a href="<?=CONTROLLER('File/myDocuments')?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-analytics-17"></span><span class="mtext">My Documents</span>
+							<span class="micon dw dw-analytics-17"></span><span class="mtext">My E-Documents</span>
 						</a>
 					</li>
-					<li>
+					<li style="display: none;">
 						<a href="<?=CONTROLLER('File/PublicDocs')?>" class="dropdown-toggle no-arrow">
 							<span class="micon dw dw-user-11"></span><span class="mtext">Public Documents</span>
 						</a>
 					</li>
-					<li>
-						<a href="<?=CONTROLLER('File/Registry')?>" class="dropdown-toggle no-arrow">
-							<span class="micon dw dw-analytics-17"></span><span class="mtext">Sent Files</span>
-						</a>
-					</li>
+					
 					<li>
 						<div class="dropdown-divider"></div>
 					</li>

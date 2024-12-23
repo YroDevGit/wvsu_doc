@@ -1,4 +1,4 @@
-<?php CY_ASSIGNED_ROLES(["ADMIN"]) ?>
+<?php CY_ASSIGNED_ROLES(["ICT"]) ?>
 <div class="page-header">
     <div class="row">
         <div class="col-md-6 col-sm-12">
@@ -12,7 +12,7 @@
                 </ol>
             </nav>
         </div>
-        <div class="col-md-6 col-sm-12 text-right">
+        <div class="col-md-6 col-sm-12 text-right" style="display: none;">
             <button type="button" class="btn btn-primary" id="addbtn" data-toggle="modal" data-target="#bd-example-modal-lg05">ADD DOCUMENTS</button>
         </div>
     </div>
@@ -27,7 +27,6 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th class="table-plus datatable-nosort">Action</th>
                     <th>Controll #</th>   
                     <th>Date Recieved</th>
                     <th>Source/Address</th>
@@ -44,18 +43,6 @@
                 <?php foreach($this->files_tbl->getRegistry(1) as $col): ?>
                     <tr>
                         <td></td>
-                        <td>
-                            <div class="dropdown">
-                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                    <i class="dw dw-more"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                    <!--<a class="dropdown-item"  ><i class="icon-copy dw dw-right-arrow"></i>Forward</a>-->
-                                    <a class="dropdown-item" onclick="return confirm('are you sure to delete selected record?')" href="<?=CONTROLLER('File/deleteRegistry?id='.$col['id'])?>"><i class="dw dw-delete-3"></i> Delete</a>
-                                </div>
-                               
-                            </div>
-                        </td>
                         <td><?=$col['control_number']?></td>
                         <td><?=$col['date_received']?></td>
                         <td><?=$col['source']?></td>

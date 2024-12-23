@@ -31,6 +31,14 @@ class Users extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
         CY_SHOW_PAGE("Super", $page_data);
     }
 
+    public function AdminAccept(){
+        $page_data = [
+            "title" => "All active users",
+            "content" => "user_accepted"
+        ];
+        CY_SHOW_PAGE("Super", $page_data);
+    }
+
     public function ActiveUsers(){
         $data = [
             "title" => "Active users",

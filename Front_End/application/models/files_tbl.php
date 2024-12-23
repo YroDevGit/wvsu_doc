@@ -115,6 +115,14 @@
             }
         }
 
+        public function getRegistryAll(){
+            $sql = "select * from registry order by date_received desc";
+            $result = CY_DB_SETQUERY($sql);
+            if($result['code']==SUCCESS_CODE){
+                return $result['data'];
+            }
+        }
+
 
 
 
