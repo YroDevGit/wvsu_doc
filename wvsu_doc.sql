@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS `activity` (
   `message` varchar(200) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table wvsu.activity: ~7 rows (approximately)
+-- Dumping data for table wvsu.activity: ~56 rows (approximately)
 REPLACE INTO `activity` (`id`, `category`, `message`, `status`) VALUES
 	(1, 'USER DISABLED', 'user id 21 is disabled', 0),
 	(2, 'USER LOGIN', '19 has been logged out', 0),
@@ -36,7 +36,56 @@ REPLACE INTO `activity` (`id`, `category`, `message`, `status`) VALUES
 	(4, 'USER LOGIN', 'USERID: 19 has been logged out', 0),
 	(5, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
 	(6, 'USER LOGIN', 'USER ID: 19 has been logged in', 0),
-	(7, 'USER LOGIN', 'USER ID: 19 has been logged in', 0);
+	(7, 'USER LOGIN', 'USER ID: 19 has been logged in', 0),
+	(8, 'USER LOGIN', 'USER ID: 19 has been logged in', 0),
+	(9, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(10, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(11, 'USER LOGIN', 'USER ID: 19 has been logged in', 0),
+	(12, 'USER LOGIN', 'USERID: 19 has been logged out', 0),
+	(13, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(14, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(15, 'USER LOGIN', 'USER ID: 19 has been logged in', 0),
+	(16, 'USER LOGIN', 'USERID: 19 has been logged out', 0),
+	(17, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(18, 'USER LOGIN', 'USER ID: 20 has been logged in', 0),
+	(19, 'USER LOGIN', 'USERID: 20 has been logged out', 0),
+	(20, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(21, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(22, 'USER LOGIN', 'USER ID: 20 has been logged in', 0),
+	(23, 'USER LOGIN', 'USERID: 20 has been logged out', 0),
+	(24, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(25, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(26, 'USER LOGIN', 'USER ID: 20 has been logged in', 0),
+	(27, 'USER LOGIN', 'USERID: 20 has been logged out', 0),
+	(28, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(29, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(30, 'USER LOGIN', 'USER ID: 20 has been logged in', 0),
+	(31, 'USER LOGIN', 'USERID: 20 has been logged out', 0),
+	(32, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(33, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(34, 'USER LOGIN', 'USER ID: 20 has been logged in', 0),
+	(35, 'USER LOGIN', 'USERID: 20 has been logged out', 0),
+	(36, 'USER LOGIN', 'USER ID: 20 has been logged in', 0),
+	(37, 'USER LOGIN', 'USERID: 20 has been logged out', 0),
+	(38, 'USER LOGIN', 'USER ID: 27 has been logged in', 0),
+	(39, 'USER LOGIN', 'USERID: 27 has been logged out', 0),
+	(40, 'USER LOGIN', 'USER ID: 23 has been logged in', 0),
+	(41, 'USER LOGIN', 'USERID: 23 has been logged out', 0),
+	(42, 'USER LOGIN', 'USER ID: 27 has been logged in', 0),
+	(43, 'USER LOGIN', 'USERID: 27 has been logged out', 0),
+	(44, 'USER LOGIN', 'USER ID: 23 has been logged in', 0),
+	(45, 'USER LOGIN', 'USERID: 23 has been logged out', 0),
+	(46, 'USER LOGIN', 'USER ID: 27 has been logged in', 0),
+	(47, 'USER LOGIN', 'USERID: 27 has been logged out', 0),
+	(48, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(49, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(50, 'USER LOGIN', 'USER ID: 23 has been logged in', 0),
+	(51, 'USER LOGIN', 'USERID: 23 has been logged out', 0),
+	(52, 'USER LOGIN', 'USER ID: 5 has been logged in', 0),
+	(53, 'USER LOGIN', 'USERID: 5 has been logged out', 0),
+	(54, 'USER LOGIN', 'USER ID: 27 has been logged in', 0),
+	(55, 'USER LOGIN', 'USERID: 27 has been logged out', 0),
+	(56, 'USER LOGIN', 'USER ID: 27 has been logged in', 0);
 
 -- Dumping structure for table wvsu.emp
 CREATE TABLE IF NOT EXISTS `emp` (
@@ -53,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `emp` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1018 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table wvsu.emp: ~6 rows (approximately)
+-- Dumping data for table wvsu.emp: ~7 rows (approximately)
 REPLACE INTO `emp` (`id`, `fullname`, `contact`, `id_card`, `profile`, `school`, `added_by`, `date_requested`, `date_added`, `stat`) VALUES
 	(1005, 'Wvsu Admin', NULL, NULL, NULL, 0, NULL, NULL, NULL, 0),
 	(1008, 'Berus Lee', NULL, 'XILBVH2024-07-26-15-01-00QN5EHD.png', NULL, 1, 1005, NULL, '2024-07-26 00:00:00', 0),
@@ -192,14 +241,15 @@ CREATE TABLE IF NOT EXISTS `registry` (
   `date_released` date NOT NULL,
   `received_by` varchar(200) NOT NULL,
   `remarks` varchar(300) NOT NULL,
+  `school` int(11) DEFAULT NULL,
+  `file_id` int(11) NOT NULL DEFAULT 1,
+  `to_school` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table wvsu.registry: ~3 rows (approximately)
-REPLACE INTO `registry` (`id`, `user`, `control_number`, `date_received`, `source`, `date_comminication`, `subject_matter`, `address`, `office_code`, `date_released`, `received_by`, `remarks`) VALUES
-	(3, 0, '', '0000-00-00', '', '0000-00-00', '', '', '', '0000-00-00', '', ''),
-	(4, 0, '', '0000-00-00', '', '0000-00-00', '', '', '', '0000-00-00', '', ''),
-	(5, 5, '', '0000-00-00', '', '0000-00-00', '', '', '', '0000-00-00', '', '');
+-- Dumping data for table wvsu.registry: ~1 rows (approximately)
+REPLACE INTO `registry` (`id`, `user`, `control_number`, `date_received`, `source`, `date_comminication`, `subject_matter`, `address`, `office_code`, `date_released`, `received_by`, `remarks`, `school`, `file_id`, `to_school`) VALUES
+	(6, 20, '32746326453', '2024-12-10', 'PASIG', '2024-12-08', 'matter', 'person', 'office', '2024-12-04', 'tyrone', 'sample remarks', 2, 1, 0);
 
 -- Dumping structure for table wvsu.school
 CREATE TABLE IF NOT EXISTS `school` (
@@ -221,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `school` (
 -- Dumping data for table wvsu.school: ~2 rows (approximately)
 REPLACE INTO `school` (`id`, `school`, `full_name`, `campus`, `department`, `address`, `school_code`, `added_by`, `date_added`, `details`, `fb_link`, `stat`) VALUES
 	(1, 'WVSU', 'West Visayas State University', 'Himamaylan', 'ICT', NULL, '13725', 1, '2024-07-17 12:57:02', NULL, NULL, 0),
-	(2, 'WVSU', 'West Visayas State University', 'Kabankalan', 'ICT', NULL, '1041', 1, '2024-07-18 17:54:48', NULL, NULL, 0);
+	(2, 'WVSU', 'West Visayas State University', 'Himamaylan', 'IT', NULL, '1041', 1, '2024-07-18 17:54:48', NULL, NULL, 0);
 
 -- Dumping structure for table wvsu.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -237,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table wvsu.users: ~6 rows (approximately)
+-- Dumping data for table wvsu.users: ~7 rows (approximately)
 REPLACE INTO `users` (`user_id`, `username`, `password`, `emp_id`, `type`, `active`, `code`, `stat`) VALUES
 	(5, 'wvsu', 'wvsu', 1005, 'SUPERADMIN', 1, 'TYRONELEEEMZ', 0),
 	(19, 'tyronemalocon@gmail.com', '1', 1008, 'ADMIN', 1, 'TYRONELEEEMZ132343', 0),
