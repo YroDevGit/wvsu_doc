@@ -42,8 +42,8 @@
 		<div class="container-fluid d-flex justify-content-between align-items-center">
 			<div class="brand-logo">
 				<a href="">
-					<img src="<?= ASSETS() ?>img/wvsu.png" alt="" height="70" width="70">
-                    <span>West Visayas State University</span>
+					<img src="<?= ASSETS() ?>img/logo.png" alt="" height="70" width="70">
+                    <span>DOCUMENT TRACKING SYSTEM</span>
 				</a>
 			</div>
 			<div class="login-menu">

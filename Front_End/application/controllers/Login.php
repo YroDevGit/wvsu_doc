@@ -85,8 +85,10 @@ class Login extends CY_Controller { //Created by: Vendor LENOVO-Name 82TT-Yro
             }
             else{
                 if($frow['active']==1){
-                    $code = CY_INT_CODE(5);
-                    $email_result = CY_SEND_PLAIN_EMAIL("WVSU login OTP", $email,"LOGIN OTP", "Your login OTP code is: ".$code);
+                    $ymail = new Yros_mail();
+                    $code = CY_INT_CODE(5); 
+                    $email_result = $ymail->send_email($email, "WVSU login OTP" , "Your login OTP code is: ".$code);
+                    
                     if($email_result['code']!=CY_SUCCESS){
                         JSON_RESPONSE_DATA(-5, "FAILED", $email_result['message'], $email_result);
                     }

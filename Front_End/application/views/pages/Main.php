@@ -378,7 +378,7 @@
 						<ul class="submenu">
 							<li><a href="<?= CONTROLLER("File") ?>">Pending</a></li>
 							<li><a href="<?= CONTROLLER("File/MyFiles") ?>">Received E-Documents</a></li>
-							<li><a href="<?= CONTROLLER("File/sentFiles") ?>">Sent E-documents</a></li>
+							<li><a href="<?= CONTROLLER("File/sentFiles") ?>">Transmitals</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">

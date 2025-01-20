@@ -188,6 +188,74 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modax" id="modax">
+		<div class="modax-body">
+			<div>
+			<p>
+				<h3>Terms of Agreement</h3>
+			</p>
+
+This Document Tracking System (DTS) is provided by West Visayas State University for the exclusive use of authorized faculty and staff members. By registering and using this system, you agree to the following terms:
+
+The system is intended for managing, tracking, and processing official university documents only. All information entered must be accurate, and users are required to maintain the confidentiality of their login credentials. You are responsible for all activities conducted under your account.
+
+Data privacy and confidentiality are of utmost importance. Documents and information accessed through the system must be used strictly for university-related purposes and handled in compliance with institutional policies and legal requirements. Any unauthorized sharing or misuse of data is prohibited.
+
+The system must not be used for personal activities or to upload harmful software or inappropriate content. Any activity that could compromise the integrity of the system or the reputation of the university is strictly forbidden.
+
+While the university ensures regular maintenance and support of the DTS, occasional disruptions may occur due to updates or unforeseen technical issues. The university will not be held liable for any data loss or temporary service unavailability.
+
+All user activities within the system are subject to monitoring to ensure compliance with this agreement. Violations of these terms may result in account suspension, removal of access, or further disciplinary action.
+
+These terms are subject to change as needed. Updates will be communicated, and continued use of the system constitutes acceptance of the revised terms.
+
+By proceeding, you acknowledge that you have read and understood this agreement and agree to adhere to its conditions.
+			</div>
+			<div class="rowp">
+				<label for="checker"><input type="checkbox" id="checker" checked> I agree to the terms and conditions</label>
+			</div>
+			<div class="rowp">
+				<button class="okaybtn" onclick="submit()">Submit</button>
+			</div>
+		</div>
+	</div>
+
+	<style>
+		.rowp{
+			padding: 10px 0px;
+		}
+		.modax{
+			position: fixed;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			z-index: 1000;
+			background-color: rgb(0,0,0,0.5);
+			vertical-align: auto;
+			align-items: center;
+			text-align: center;
+			align-content: center;
+		}
+		.modax-body{
+			background-color: #d2c8c8;
+			padding: 10px 15px 10px 15px;
+			display: inline-block;
+			border-radius: 5px;
+		}
+		.modax-body div{
+			max-height: 500px;
+			overflow-y: scroll;
+			max-width: 500px;
+		}
+		.okaybtn{
+			background-color: green;
+			border-radius: 5px;
+			border: solid 1px green;
+			padding: 0px 5px;
+		}
+	</style>
 	<!-- success Popup html End -->
 	<!-- js -->
 	<script src="<?= ASSETS() ?>vendors/scripts/core.js"></script>
@@ -222,3 +290,14 @@
 
 <link rel="stylesheet" href="<?= SRC('fileview.css') ?>">
 <script src="<?= SRC('fileview.js')?>"></script>
+
+<script>
+	function submit(){
+		const ch = document.getElementById('checker');
+		if(ch.checked){
+			document.getElementById('modax').style.display='none';
+		}else{
+			alert("Please agree to the terms and conditions");
+		}
+	}
+</script>
